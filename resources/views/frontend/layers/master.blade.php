@@ -11,7 +11,7 @@
             {{ $dashboard_settings->title }}
         @endif
     </title>
-       <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="images/icon.png" type="image/gif" sizes="16x16">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta
@@ -19,14 +19,16 @@
         name="description" />
     <meta content="" name="keywords" />
     <meta content="" name="author" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--[if lt IE 9]>
             <script src="js/html5shiv.js"></script>
         <![endif]-->
     <!-- CSS Files
 
     ================================================== -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @include('frontend.layers.style')
     @yield('css')
@@ -55,7 +57,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="widget">
-                            <a href="index.html"><img alt="" class="img-fluid mb20"
+                            <a href="{{ url('/') }}"><img alt="" class="img-fluid mb20"
                                     src="@if ($dashboard_settings) {{ asset('/image/dashboard/' . $dashboard_settings->logo) }} @else  {{ asset('logo2.png') }} @endif"></a>
                             <address class="s1">
                                 <span><i class="id-color fa fa-map-marker fa-lg"></i>
@@ -115,7 +117,7 @@
                 <div class="container">
                     <div class="row g-4 align-items-center">
                         <div class="col-lg-6">
-                            &copy; Copyright {{ now()->year }} - {{$dashboard_settings->copyright}}
+                            &copy; Copyright {{ now()->year }} - {{ $dashboard_settings->copyright }}
                         </div>
                         <div class="col-lg-6 text-lg-end">
                             <div class="social-icons">

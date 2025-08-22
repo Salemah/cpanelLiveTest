@@ -6,7 +6,7 @@
                      <div class="de-flex-col">
                          <!-- logo begin -->
                          <div id="logo">
-                             <a href="index.html">
+                             <a href="{{ url('/') }}">
                                  <img alt="" class="logo"
                                      src="@if ($dashboard_settings) {{ asset('/image/dashboard/' . $dashboard_settings->logo) }} @else  {{ asset('logo2.png') }} @endif" />
                                  <img alt="" class="logo-2"
@@ -19,7 +19,7 @@
                          <!-- mainmenu begin -->
                          <ul id="mainmenu">
                              <li><a href="{{ url('/') }}">Home</a></li>
-                             <li><a href="about.html">About</a>
+                             <li><a href="#">About</a>
                                  <ul>
                                      <li><a href="{{ route('frontend.about.us') }}">About Us</a></li>
                                      <li><a href="{{ route('frontend.our.team') }}">The Team</a></li>
