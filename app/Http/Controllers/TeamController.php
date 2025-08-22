@@ -59,16 +59,15 @@ class TeamController extends Controller
 
 
 
-                            $htmlData .= '<a href="javascript:void(0)" data-id="' . $data->id . '" class="btn btn-info btn-sm tableEdit"><i class="fa fa-edit"></i></a>';
+                $htmlData .= '<a href="javascript:void(0)" data-id="' . $data->id . '" class="btn btn-info btn-sm tableEdit"><i class="fa fa-edit"></i></a>';
 
 
 
-                            $htmlData .= '<a href="javascript:void(0)" data-id="' . $data->id . '" class="btn btn-danger btn-sm tableDelete"><i class="fa fa-trash"></i></a>';
+                $htmlData .= '<a href="javascript:void(0)" data-id="' . $data->id . '" class="btn btn-danger btn-sm tableDelete"><i class="fa fa-trash"></i></a>';
 
 
 
-                    return $htmlData;
-
+                return $htmlData;
             })
             ->rawColumns(['action'])
             ->toJson();
@@ -93,8 +92,8 @@ class TeamController extends Controller
 
                 'name' => 'required',
                 'fees' => 'required',
-                'phone' =>['required', 'regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/'],
-                 'email' => 'required',
+                'phone' => ['required', 'regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/'],
+                'email' => 'required',
             ]);
 
             $message = 'Team Member Create Successfully!';
@@ -125,11 +124,11 @@ class TeamController extends Controller
                     $User->password = Hash::make($request->password);
                     $User->type = 'team';
                     $User->assignRole('team');
-                 $User->save();
+                    $User->save();
 
-                 $Setting = CompanySetting::first();
+                    $Setting = CompanySetting::first();
 
-                 $mailData = [
+                    $mailData = [
                         'logo' => $Setting->logo,
                         'title' => $Setting->title,
                         'website' => $Setting->website,
@@ -143,19 +142,19 @@ class TeamController extends Controller
                     $dynamicSubject = $Setting->title . ' - Welcome ' . $request->name;
                     // dd($mailData);
                     Mail::to($request->email)->send(new DemoMail($mailData, $dynamicSubject));
-
                 }
 
                 $query->name = $request->name;
                 $query->details = $request->details;
                 $query->positions = $request->positions;
                 $query->fees = $request->fees;
-                $query->legal_area= implode(",", $request->legal_area_id);
+                $query->legal_area = implode(",", $request->legal_area_id);
                 $query->sub_legal_area = $request->sub_legal_area;
 
                 $query->phone = $request->phone;
                 $query->email = $request->email;
                 $query->status = $request->status;
+                $query->details = $request->details;
                 $query->facebook = $request->facebook;
                 $query->twitter = $request->twitter;
                 $query->linkedin = $request->linkedin;
@@ -163,14 +162,14 @@ class TeamController extends Controller
 
                 if ($request->file('image')) {
                     $file = $request->file('image');
-                    $old_img = public_path('/image/team'.$request->image);
+                    $old_img = public_path('/image/team' . $request->image);
                     if (file_exists($old_img)) {
                         @unlink($old_img);
                     }
                     $filenamefavicon = time() . $file->getClientOriginalName();
                     $file->move(public_path('/image/team'),  $filenamefavicon);
 
-                    $query->image = 'image/team/'.$filenamefavicon;
+                    $query->image = 'image/team/' . $filenamefavicon;
                 }
 
                 $query->save();

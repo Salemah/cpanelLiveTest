@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col text-center">
                         <div class="spacer-single"></div>
-                        <h1>FAQ</h1>
+                        <h1>Appointment</h1>
                         <p>Reputation. Respect. Result.</p>
                     </div>
                     <div class="clearfix"></div>

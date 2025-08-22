@@ -103,8 +103,10 @@
                             </div>
                             <div class="form-group col-2">
                                 <img src="" id="imageedit" style="width: 40px; height:auto;" alt="">
-
-
+                            </div>
+                              <div class="col-12 mb-6">
+                                <label for="recipient-name" class="col-form-label">Details:</label>
+                                <textarea name="details" id="details" cols="30" rows="10" class="form-control ckeditor"></textarea>
                             </div>
                             <div class="form-group col-6 col-sm-6 col-md-6 mb-2">
                                 <label for="favicon">Status<span class="text-danger">*</span></label>
@@ -266,6 +268,10 @@
                         $('input[name^="fees"]').val(responseText.data.fees);
                         $('input[name^="positions"]').val(responseText.data.positions);
                         $('textarea[name^="address"]').val(responseText.data.address);
+                          if (responseText.data.details) {
+                            tinymce.get('details').setContent(responseText.data
+                                .details);
+                        }
                         var selectedLegalAreas = responseText.legal_areas;
 
                         $('#legal_area_id').val(null).trigger('change');
@@ -278,7 +284,7 @@
 
                         $('select[name^="status"]').val(responseText.data.status);
 
-                
+
                         // if (responseText.data.contact_category_id) {
                         //     var newOption = new Option(responseText.contact_category_name,
                         //         responseText.data.contact_category_id, false, false);
