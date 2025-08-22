@@ -1,0 +1,128 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Testimonial;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
+
+
+class TestimonialController extends Controller
+{
+    public function Testimonial()
+    {
+        return view('backend.testimonial',);
+    }
+    public function TestimonialData(Request $request)
+    {
+
+        $accounts_customer_accounts = Testimonial::orderBy('id', 'desc');
+
+
+        $this->i = 1;
+
+        return DataTables::of($accounts_customer_accounts)
+
+            ->addColumn('id', function ($data) {
+                return $this->i++;
+            })
+            ->addColumn('description', function ($data) {
+                return Str::limit($data->description, 100);
+            })
+
+            ->addColumn('action', function ($data) {
+                $htmlData = '';
+                $htmlData .= '<a href="javascript:void(0)" data-id="' . $data->id . '" class="btn btn-info btn-sm tableEdit"><i class="fa fa-edit"></i></a>';
+                $htmlData .= '<a href="javascript:void(0)" data-id="' . $data->id . '" class="btn btn-danger btn-sm tableDelete"><i class="fa fa-trash"></i></a>';
+                return $htmlData;
+            })
+            ->rawColumns(['description', 'action'])
+            ->toJson();
+    }
+    public function TestimonialInsert(Request $request)
+    {
+
+        if ($request->has('delete')) {
+            $query = Testimonial::find($request->delete);
+
+            $query->delete();
+
+            $message = 'Testimonial Deleted Successfully!';
+        } else {
+
+
+                $request->validate([
+                    'title' => 'required',
+
+                    'description' => 'required',
+
+                ]);
+
+            $message = 'Testimonial  Create Successfully!';
+
+            try {
+                DB::beginTransaction();
+
+                if ($request->has('id')) {
+                    $query = Testimonial::find($request->id);
+                    $message = 'Testimonial Updated Successfully!';
+
+                    if (!$query) {
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Not Found, Please Try Again...',
+                        ], 422);
+                    }
+                } else {
+                    $query = new Testimonial();
+                }
+
+                $query->title = $request->title;
+                $query->quote_by = $request->quote_by;
+                $query->description = $request->description;
+                $query->status = $request->status;
+
+                $query->added_by = Auth::id();
+
+
+                $query->save();
+
+
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback(); //Transaction rollback
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Server Error' . json_encode($e->errorInfo),
+                ], 422);
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => $message,
+
+        ]);
+    }
+    public function TestimonialEditData(Request $request)
+    {
+        $query = Testimonial::find($request->id);
+
+        if (!$query) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Not Found, Please Try Again...',
+            ], 422);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $query,
+
+        ]);
+    }
+}
