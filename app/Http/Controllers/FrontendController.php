@@ -52,6 +52,13 @@ class FrontendController extends Controller
             'teams' => Team::where('status', 'Active')->get(),
         ]);
     }
+    public function TeamDetails(Request $request)
+    {
+    
+        return view('frontend.team_details', [
+            'team' => Team::find($request->id),
+        ]);
+    }
     public function Faq(Request $request)
     {
         $categories = FaqCategory::with('faqs')->get();

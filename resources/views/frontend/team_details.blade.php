@@ -21,7 +21,7 @@
         </div>
     </section>
     <!-- section close -->
-      <section aria-label="section">
+    <section aria-label="section">
         <div class="container">
             <div class="row">
                 {{-- <div class="col-md-12 text-center">
@@ -29,7 +29,7 @@
                     <div class="small-border"></div>
                 </div> --}}
 
-                @if ($teams)
+                {{-- @if ($teams)
                     @foreach ($teams as $team)
                         <div class="col-lg-4 col-md-6 col-sm-6 mb30 wow fadeInRight" data-wow-delay=".2s">
                             <div class="f-profile text-center">
@@ -40,8 +40,8 @@
                                                 <a href="{{ $team->facebook }}"><i class="fa fa-facebook fa-lg"></i></a>
                                                 <a href="{{ $team->twitter }}"><i class="fa fa-twitter fa-lg"></i></a>
                                                 <a href="{{ $team->linkedin }}"><i class="fa fa-linkedin fa-lg"></i></a>
-                                                <a class="" title="Make Appointment" href="{{ route('frontend.team_details',['id' => $team->id]) }}"><i class="fa-regular fa-calendar-check"></i></a>
-                                                {{-- <a href="#"><i class="fa fa-pinterest fa-lg"></i></a> --}}
+                                                <a class="arrow flaticon-right-arrow-3" href="{{ route('frontend.team_details',$team->id) }}"></a>
+
                                             </div>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     @endforeach
-                @endif
+                @endif --}}
 
                 <div class="col-lg-4 col-md-6 col-sm-6 mb30 wow fadeInRight" data-wow-delay=".4s">
                     <div class="f-profile text-center">
@@ -70,32 +70,15 @@
                                 </div>
                             </div>
                             <div class="fpw-overlay-btm"></div>
-                            <img src="images/team/2.jpg" class="fp-image img-fluid" alt="">
+                            <img src="{{ asset($team->image) }}" class="fp-image img-fluid"
+                                alt="{{ $team->name }} {{ $team->position }}">
                         </div>
-                        <h4>Sasha Welsh</h4>
-                        Senior Partner
+                        <h4>{{ $team->name }}</h4>
+                        <h5>{{ $team->positions }}</h5>
+                        <p>{!! $team->details !!}</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 mb30 wow fadeInRight" data-wow-delay=".6s">
-                    <div class="f-profile text-center">
-                        <div class="fp-wrap f-invert">
-                            <div class="fpw-overlay">
-                                <div class="fpwo-wrap">
-                                    <div class="fpwow-icons">
-                                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fpw-overlay-btm"></div>
-                            <img src="images/team/3.jpg" class="fp-image img-fluid" alt="">
-                        </div>
-                        <h4>John Shepard</h4>
-                        Associate
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>

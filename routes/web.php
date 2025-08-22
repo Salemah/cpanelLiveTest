@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'Home'])->name('home');
 Route::get('about_us', [FrontendController::class, 'AboutUs'])->name('frontend.about.us');
 Route::get('our_team', [FrontendController::class, 'OurTeam'])->name('frontend.our.team');
+Route::get('team_details/{id?}', [FrontendController::class, 'TeamDetails'])->name('frontend.team_details');
 Route::get('faq', [FrontendController::class, 'Faq'])->name('frontend.faq');
 Route::get('articles', [FrontendController::class, 'Articles'])->name('frontend.articles');
 Route::get('contact', [FrontendController::class, 'ContactUs'])->name('frontend.contact');
