@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "spatie/laravel-activitylog": "^4.8",
         "spatie/laravel-permission": "^6.9",
+        "spatie/opening-hours": "^3.0",
         "yajra/laravel-datatables": "^10.1"
     },
     "require-dev": {

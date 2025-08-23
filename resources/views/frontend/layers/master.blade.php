@@ -32,6 +32,14 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @include('frontend.layers.style')
     @yield('css')
+    {{-- <style>
+         .ripple-wave {
+  pointer-events: none;
+}
+.ripple-wave.active {
+  all: unset; /* Remove all styles applied by active */
+}
+    </style> --}}
 </head>
 
 <body>

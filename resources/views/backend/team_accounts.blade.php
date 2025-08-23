@@ -15,8 +15,9 @@
                                 </ol>
                             </nav>
                             {{-- <a href="{{ route('account.sale_list') }}" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"><i class="fa fa-angle-double-left"></i> {{ __('messages.Sale List') }}</a> --}}
-                            <button class="btn btn-primary btn-sm TeamAddButton" style="float: right;margin-top:-20px;"><i
-                                    class="fa fa-plus"></i>Team</button>
+                            <a type="button" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;" href="{{ route('admin.account.team.create') }}">+ Add New Team</a>
+                            {{-- <button class="btn btn-primary btn-sm TeamAddButton" style="float: right;margin-top:-20px;"><i
+                                    class="fa fa-plus"></i>Team</button> --}}
                         </div>
 
                         <div class="card-block container">
@@ -33,101 +34,7 @@
 
     </div>
 
-    <div class="modal fade" id="TeamAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <form id="team_insert_update" action="{{ route('admin.account.team.insert') }}" accept-charset="utf-6"
-                enctype="multipart/form-data" method="post" class="form-horizontal validatable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Team Add</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <input type="hidden" name="id" value="" id="hidden-id" />
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Name:</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Positions:</label>
-                                <input type="text" name="positions" id="positions" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Fees:</label>
-                                <input type="text" name="fees" id="fees" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Legal Area:</label>
-                                <select name="legal_area_id[]" id="legal_area_id" class="form-control" multiple="multiple">
-                                    <option>--Select Legal Area--</option>
-                                    {{-- @foreach ($legalareas as $legalarea)
-                                            <option value="{{ $legalarea->id}}">{{ $legalarea->name}}</option>
-                                        @endforeach --}}
-                                </select>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Email:</label>
-                                <input type="text" name="email" id="email" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Phone:</label>
-                                <input type="text" name="phone" id="phone" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Password:</label>
-                                <input type="password" name="password" class="form-control"placeholder="Password"
-                                    id="password">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Facebook:</label>
-                                <input type="text" name="facebook" class="form-control"placeholder="facebook"
-                                    id="facebook">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Twitter:</label>
-                                <input type="text" name="twitter" class="form-control"placeholder="twitter"
-                                    id="twitter">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Linkedin:</label>
-                                <input type="text" name="linkedin" class="form-control"placeholder="linkedin"
-                                    id="linkedin">
-                            </div>
-                            <div class="form-group col-10 mb-2">
-                                <label for="favicon">Upload Image<span class="text-danger">*</span> <span
-                                        class="text-danger">( Size: 500*500)</span></label>
-                                <input type="file" id="image" data-height="290" class="dropify form-control "
-                                    name="image">
-
-                            </div>
-                            <div class="form-group col-2">
-                                <img src="" id="imageedit" style="width: 40px; height:auto;" alt="">
-                            </div>
-                              <div class="col-12 mb-6">
-                                <label for="recipient-name" class="col-form-label">Details:</label>
-                                <textarea name="details" id="details" cols="30" rows="10" class="form-control ckeditor"></textarea>
-                            </div>
-                            <div class="form-group col-6 col-sm-6 col-md-6 mb-2">
-                                <label for="favicon">Status<span class="text-danger">*</span></label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="">Select Status</option>
-                                    <option value="Active" selected>Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    
 @endsection
 
 @section('script')
@@ -177,31 +84,6 @@
                 ]
             });
 
-            $('#team_insert_update').ajaxForm({
-                beforeSend: formBeforeSend,
-                beforeSubmit: formBeforeSubmit,
-                error: formError,
-                success: function(responseText, statusText, xhr, $form) {
-                    formSuccess(responseText, statusText, xhr, $form);
-                    $('#team_table').DataTable().draw(true);
-
-                    $("#TeamAdd").modal('hide');
-                    $('#hidden-id').setAttribute("disabled");
-
-                },
-                clearForm: true,
-                resetForm: true
-            });
-
-            $(document).on('click', '.TeamAddButton', function() {
-
-                $("#customer_insert_update").trigger("reset");
-                $('#hidden-id').attr("disabled", "true");
-                $("#TeamAdd").modal('show');
-                var customerId = "T" + generator.TeamAdd();
-                $('input[name^="contact_code"]').val(customerId);
-
-            });
 
             $(document).on('click', '.tableDelete', function() {
 
@@ -218,7 +100,7 @@
                     if (result.isConfirmed) {
                         let Id = $(this).data('id'); // Retrieve the ID for deletion
                         $.ajax({
-                            url: "{{ route('admin.account.team.insert') }}",
+                            url: "{{ route('admin.account.team.destroy') }}",
                             type: "POST",
                             data: {
                                 _token: "{{ csrf_token() }}", // Include CSRF token for security
@@ -245,140 +127,6 @@
                     }
                 });
             });
-
-
-
-            $(document).on('click', '.tableEdit', function() {
-                let Id = $(this).data('id');
-                $('#hidden-id').removeAttr("disabled");
-                $('#hidden-id').val(Id);
-                $(this).ajaxSubmit({
-                    error: formError,
-                    data: {
-                        "id": Id
-                    },
-                    dataType: 'json',
-                    method: 'GET',
-                    url: "{{ route('admin.account.team.edit') }}",
-                    success: function(responseText) {
-
-                        $('input[name^="name"]').val(responseText.data.name);
-                        $('input[name^="email"]').val(responseText.data.email);
-                        $('input[name^="phone"]').val(responseText.data.phone);
-                        $('input[name^="fees"]').val(responseText.data.fees);
-                        $('input[name^="positions"]').val(responseText.data.positions);
-                        $('textarea[name^="address"]').val(responseText.data.address);
-                          if (responseText.data.details) {
-                            tinymce.get('details').setContent(responseText.data
-                                .details);
-                        }
-                        var selectedLegalAreas = responseText.legal_areas;
-
-                        $('#legal_area_id').val(null).trigger('change');
-
-                        $.each(selectedLegalAreas, function(index, legalArea) {
-                            var option = new Option(legalArea.name, legalArea.id, true,
-                                true);
-                            $('#legal_area_id').append(option).trigger('change');
-                        });
-
-                        $('select[name^="status"]').val(responseText.data.status);
-
-
-                        // if (responseText.data.contact_category_id) {
-                        //     var newOption = new Option(responseText.contact_category_name,
-                        //         responseText.data.contact_category_id, false, false);
-                        //     $('select[name^="contact_category_id"]').empty().append(newOption);
-                        // }
-                        const baseUrl = "{{ asset('/') }}";
-                        $('select[name^="status"]').val(responseText.data.status);
-                        let imageName = responseText.data.image;
-                        let imageUrl = baseUrl + imageName;
-                        // Get the Dropify element
-                        // let drEvent = $('#image').dropify();
-
-                        // // Clear the current Dropify instance
-                        // drEvent = drEvent.data('dropify');
-                        // drEvent.resetPreview();
-                        // drEvent.clearElement();
-                        // Destroy the existing Dropify instance
-                        //$('#image').dropify().destroy();
-
-                        console.log(imageUrl);
-                        // Set the new data-default-file attribute
-                        $('#imageedit').attr('src', imageUrl);
-
-                        // Reinitialize Dropify with the updated data-default-file
-                        // $('#image').dropify({
-                        //     defaultFile: imageUrl
-                        // });
-
-                        $("#TeamAdd").modal('show');
-                    }
-                });
-            });
-
-            // function IDGenerator(value = 10) {
-
-            //     this.length = value;
-            //     this.timestamp = +new Date;
-
-            //     var _getRandomInt = function(min, max) {
-            //         return Math.floor(Math.random() * (max - min + 1)) + min;
-            //     }
-
-            //     this.generate = function() {
-            //         var ts = this.timestamp.toString();
-            //         var parts = ts.split("").reverse();
-            //         var id = "";
-
-            //         for (var i = 0; i < this.length; ++i) {
-            //             var index = _getRandomInt(0, parts.length - 1);
-            //             id += parts[index];
-            //         }
-
-            //         return id;
-            //     }
-            // }
-
-
-
-            $('#legal_area_id').select2({
-                dropdownParent: $('#TeamAdd'),
-                placeholder: 'Select Legal Area',
-                ajax: {
-                    url: '{{ route('admin.account.legal_area.search') }}',
-                    dataType: 'json',
-                    type: "GET",
-                    data: function(data) {
-                        return {
-                            searchTerm: data.term // search term
-                        };
-                    },
-                    processResults: function(response) {
-                        return {
-                            results: response
-                        };
-                    },
-                    cache: true
-                }
-
-            });
-            $('#TeamAdd').on('hidden.bs.modal', function() {
-                $('#team_insert_update')[0].reset(); // Clear the form data
-            });
-            $('.modal').on('show.bs.modal', function() {
-                let drEvent = $('#image').dropify();
-                drEvent = drEvent.data('dropify');
-                drEvent.resetPreview();
-                drEvent.clearElement();
-            });
-
-
-
-
-
-
 
 
         });

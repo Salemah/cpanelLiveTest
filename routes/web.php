@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CompanySettingController;
@@ -53,6 +54,11 @@ Route::get('articles_by_tag/{id?}', [FrontendController::class, 'ArticlesByTag']
 Route::get('make_appointment/{id?}', [FrontendController::class, 'MakeAppointment'])->name('frontend.make_appointment');
 Route::get('slot_get/{id?}', [FrontendController::class, 'SlotGet'])->name('frontend.slot_get');
 
+Route::get('/employees/{employee}/availability/{date?}', [FrontendController::class, 'getEmployeeAvailability'])
+    ->name('employee.availability');
+Route::get('/team/{id}/employees', [FrontendController::class, 'getEmployees'])->name('get.employees');
+Route::post('/bookings', [AppointmentController::class, 'store'])->name('bookings.store');
+
 
 Route::post('contact_us_message_insert', [ContactUsMessageController::class, 'ContactUsMessageInsert'])->name('account.contact_us_message.insert');
 // Route::get('/dashboard', function () {
@@ -86,13 +92,20 @@ Route::middleware('auth')->group(function () {
         Route::get('user_role_list', [UserManagementController::class, 'userRoleLists'])->name('user_role_list');
         Route::get('user_role/{id?}', [UserManagementController::class, 'userRole'])->name('user-role');
         Route::post('user_role/update', [UserManagementController::class, 'userRoleUpdate'])->name('user_role.update');
-
-
+        Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments');
+        Route::post('/appointments/update-status', [AppointmentController::class, 'updateStatus'])->name('appointments.update.status');
+        Route::post('/update-status', [AppointmentController::class, 'DashboardUpdateStatus'])->name('dashboard.update.status');
 
         Route::get('team/{id?}', [TeamController::class, 'TeamAccounts'])->name('account.team');
+        Route::get('team_create', [TeamController::class, 'TeamCreate'])->name('account.team.create');
+        Route::get('team_edit/{id?}', [TeamController::class, 'TeamEdit'])->name('account.team.editnew');
+        Route::post('team_destroy/{id?}', [TeamController::class, 'TeamDestroy'])->name('account.team.destroy');
+
         Route::get('team_data', [TeamController::class, 'TeamData'])->name('account.team.data');
         Route::get('team_edit_data', [TeamController::class, 'TeamEditData'])->name('account.team.edit');
+
         Route::post('team_insert', [TeamController::class, 'TeamInsert'])->name('account.team.insert');
+        Route::post('team_update/{id?}', [TeamController::class, 'TeamUpdate'])->name('account.team.update');
 
         Route::get('legal_area/{id?}', [LegalAreaController::class, 'LegalArea'])->name('account.legal_area');
         Route::get('legal_area_data', [LegalAreaController::class, 'LegalAreaData'])->name('account.legal_area.data');

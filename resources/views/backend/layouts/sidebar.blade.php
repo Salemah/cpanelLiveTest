@@ -61,6 +61,11 @@
                      </a>
                  </li>
                  <li class="menu-item">
+                     <a href="{{ route('admin.appointments') }}" class="menu-link">
+                         <div data-i18n="Appointments">Appointments</div>
+                     </a>
+                 </li>
+                 <li class="menu-item">
                      <a href="{{ route('admin.account.slot') }}" class="menu-link">
                          <div data-i18n="Schedule">Schedule</div>
                      </a>
