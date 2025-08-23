@@ -15,7 +15,7 @@ class AppointmentController extends Controller
 {
     public function store(Request $request)
     {
-       // dd($request->all());
+        // dd($request->all());
         $validated = $request->validate([
             'user_id' => 'nullable|exists:users,id',
             'team_id' => 'required|exists:teams,id',
@@ -72,6 +72,7 @@ class AppointmentController extends Controller
             'team_id' => $appointment->employee->name,
 
         ];
+        
         $dynamicSubject = $Setting->title . ' - Welcome ' . $request->name;
 
         Mail::to($request->email)->send(new Appointmail($mailData, $dynamicSubject));
@@ -89,7 +90,7 @@ class AppointmentController extends Controller
     public function index()
     {
         $appointments = Appointment::with('employee')->latest()->get();
-         //dd($appointments); // for debuggin'g only
+        //dd($appointments); // for debuggin'g only
         return view('backend.appointment.index', compact('appointments'));
     }
     public function updateStatus(Request $request)
