@@ -6,6 +6,7 @@ use App\Models\AboutUs;
 use App\Models\Appointment;
 use App\Models\Article;
 use App\Models\Banner;
+use App\Models\CompanySetting;
 use App\Models\ContactUs;
 use App\Models\Experience;
 use App\Models\FaqCategory;
@@ -61,8 +62,9 @@ class FrontendController extends Controller
 
         $employees = Team::get();
         $team = Team::find($request->id);
+        $Setting = CompanySetting::first();
 
-        return view('frontend.team_details', compact('categories', 'employees', 'team'));
+        return view('frontend.team_details', compact('categories', 'Setting', 'employees', 'team'));
 
     }
     public function getEmployeeAvailability(Team $employee, $date = null)

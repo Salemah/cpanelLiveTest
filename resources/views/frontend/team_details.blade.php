@@ -1,303 +1,316 @@
-@extends('frontend.layers.master')
+{{-- @extends('frontend.layers.master')
 @section('top_bar')
     @include('frontend.layers.topbar')
 @endsection
 @section('header')
     @include('frontend.layers.transparent_header')
-@endsection
-<style>
-    .ripple-wave.active {
-        /* Do nothing */
-        all: unset;
-        /* removes styles from active */
-        /* Or just override specific styles */
-        background: inherit;
-        animation: none;
-    }
+@endsection --}}
+<!DOCTYPE html>
+<html lang="en">
 
-    .ripple-wave {
-        pointer-events: none;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- <title> {{ $setting->meta_title }}</title> --}}
+    <!-- SEO Meta Tags -->
 
-    .ripple-wave.active {
-        all: unset;
-        /* Remove all styles applied by active */
-    }
-
-    .ripple-wave.active {
-        /* Do nothing */
-        all: unset;
-        /* removes styles from active */
-        /* Or just override specific styles */
-        background: inherit;
-        animation: none;
-    }
-
-    .booking-container {
-        max-width: 1000px;
-        margin: 50px auto;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
-        overflow: hidden;
-    }
-
-    .booking-header {
-        background: var(--primary-color);
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .booking-steps {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
-        background-color: #f1f3f9;
-    }
-
-    .step {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-        margin-right: 20px;
-    }
-
-    .step-number {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #e0e0e0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        margin-bottom: 10px;
-        transition: all 0.3s ease;
-    }
-
-    .step.active .step-number {
-        background-color: var(--primary-color);
-        color: white;
-    }
-
-    .step.completed .step-number {
-        background-color: #28a745;
-        color: white;
-    }
-
-    .step-title {
-        font-size: 14px;
-        text-align: center;
-        color: #6c757d;
-        transition: all 0.3s ease;
-    }
-
-    .step.active .step-title {
-        color: var(--primary-color);
-        font-weight: bold;
-    }
-
-    .step.completed .step-title {
-        color: #28a745;
-    }
-
-    .booking-content {
-        padding: 15px;
-        min-height: 400px;
-    }
-
-
-    .booking-step {
-        display: none;
-        animation: fadeIn 0.5s ease;
-    }
-
-    .booking-step.active {
-        display: block;
-    }
-
-    .booking-footer {
-        padding: 20px;
-        border-top: 1px solid #e3e6f0;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .category-card,
-    .service-card,
-    .employee-card {
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        margin-bottom: 20px;
-        height: 100%;
-    }
-
-    .category-card:hover,
-    .service-card:hover,
-    .employee-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    }
-
-    .category-card.selected,
-    .service-card.selected,
-    .employee-card.selected {
-        border-color: var(--primary-color);
-        background-color: rgba(78, 115, 223, 0.1);
-        border: 1px solid #4087ff !important;
-    }
-
-
-    .card-icon {
-        font-size: 2rem;
-        margin-bottom: 15px;
-        color: var(--primary-color);
-    }
-
-    .time-slot {
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 5px;
-        text-align: center;
-    }
-
-    .time-slot:hover {
-        background-color: rgba(78, 115, 223, 0.1);
-    }
-
-    .time-slot.selected {
-        background-color: var(--primary-color);
-        color: white;
-        border-color: var(--primary-color);
-    }
-
-    .time-slot.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        background-color: #f8f9fa;
-    }
-
-    .calendar-day {
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .calendar-day:hover:not(.disabled) {
-        background-color: rgba(78, 115, 223, 0.1);
-    }
-
-    .calendar-day.selected {
-        background-color: var(--primary-color);
-        color: white;
-    }
-
-    .calendar-day.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        background-color: #f8f9fa;
-    }
-
-    .summary-item {
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #e3e6f0;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+        integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #eaa636;
+            --secondary-color: #f8f9fc;
+            --accent-color: #2e59d9;
+            --text-color: #5a5c69;
         }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slideIn {
-        from {
-            transform: translateX(50px);
-            opacity: 0;
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         }
 
-        to {
-            transform: translateX(0);
-            opacity: 1;
+        .booking-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            overflow: hidden;
         }
-    }
 
-    .animate-slide-in {
-        animation: slideIn 0.5s ease forwards;
-    }
+        .booking-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-    /* Progress bar between steps */
-    .booking-steps::before {
-        content: '';
-        /* position: absolute; */
-        top: 80px;
-        left: 20%;
-        right: 20%;
-        height: 2px;
-        background-color: transparent;
-        z-index: 0;
-    }
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f1f3f9;
+        }
 
-    .progress-bar-steps {
-        position: relative;
-        height: 4px;
-        background-color: #e0e0e0;
-        /* margin: 0 40px; */
-        top: -22px;
-        z-index: 0;
-    }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            margin-right: 20px;
+        }
 
-    .progress-bar-steps .progress {
-        height: 100%;
-        background-color: var(--primary-color);
-        width: 0%;
-        transition: width 0.5s ease;
-    }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
 
-    @media(min-width:720px) {
+        .step.active .step-number {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .step-title {
+            font-size: 14px;
+            text-align: center;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-title {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .step.completed .step-title {
+            color: #28a745;
+        }
+
         .booking-content {
-            padding: 30px;
+            padding: 15px;
             min-height: 400px;
         }
 
-    }
 
-    .ripple-wave {
-        pointer-events: none;
-    }
+        .booking-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
 
-    .ripple-wave.active {
-        all: unset;
-        /* Remove all styles applied by active */
-    }
-</style>
-@section('content')
-    <section id="subheader" class="text-white" data-bgcolor="#111111">
-        <div class="center-y relative text-center">
+        .booking-step.active {
+            display: block;
+        }
+
+        .booking-footer {
+            padding: 20px;
+            border-top: 1px solid #e3e6f0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .category-card,
+        .service-card,
+        .employee-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+
+        .category-card:hover,
+        .service-card:hover,
+        .employee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card.selected,
+        .service-card.selected,
+        .employee-card.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(78, 115, 223, 0.1);
+            border: 1px solid #4087ff !important;
+        }
+
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .time-slot {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            text-align: center;
+        }
+
+        .time-slot:hover {
+            background-color: rgba(78, 115, 223, 0.1);
+        }
+
+        .time-slot.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .time-slot.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f8f9fa;
+        }
+
+        .calendar-day {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-day:hover:not(.disabled) {
+            background-color: rgba(78, 115, 223, 0.1);
+        }
+
+        .calendar-day.selected {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .calendar-day.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f8f9fa;
+        }
+
+        .summary-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        /* Progress bar between steps */
+        .booking-steps::before {
+            content: '';
+            /* position: absolute; */
+            top: 80px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background-color: transparent;
+            z-index: 0;
+        }
+
+        .progress-bar-steps {
+            position: relative;
+            height: 4px;
+            background-color: #e0e0e0;
+            /* margin: 0 40px; */
+            top: -22px;
+            z-index: 0;
+        }
+
+        .progress-bar-steps .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        @media(min-width:720px) {
+            .booking-content {
+                padding: 30px;
+                min-height: 400px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-section">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-                        <div class="spacer-single"></div>
-                        <h1>The Team</h1>
-                        <p>Reputation. Respect. Result.</p>
-                    </div>
-                    <div class="clearfix"></div>
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <i class="bi bi-calendar-check"></i> {{ $Setting->title }}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ route('login') }}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            </li>
+                        @endguest
+
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/') }}">Home</a>
+                            </li>
+                        @endauth
+
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </nav>
+    </header>
+
+
+
     <!-- section close -->
     <section aria-label="section">
         <div class="container">
@@ -306,13 +319,15 @@
 
                 <div class="col-lg-12 col-md-12 col-sm-12  wow fadeInRight" data-wow-delay=".4s">
                     <div class="f-profile text-center">
+
                         <input type="hidden" name="team_id" id="team_id" value="{{ $team->id }}">
                         <h4>{{ $team->name }}</h4>
                         <h5>{{ $team->positions }}</h5>
                         <p>{!! $team->details !!}</p>
                         <input type="hidden" name="team_name" id="team_name" value="{{ $team->name }}">
                         <input type="hidden" name="fees" id="fees" value="{{ $team->fees }}">
-                        <input type="hidden" name="slot_duration" id="slot_duration" value="{{ $team->slot_duration }}">
+                        <input type="hidden" name="slot_duration" id="slot_duration"
+                            value="{{ $team->slot_duration }}">
                     </div>
                 </div>
                 {{-- -----------------make appointment --}}
@@ -351,7 +366,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="card mb-4">
-                                                <div class="card-header d-flex justify-content-between align-items-center">
+                                                <div
+                                                    class="card-header d-flex justify-content-between align-items-center">
                                                     <button class="btn btn-sm btn-outline-secondary" id="prev-month"><i
                                                             class="fa-solid fa-angle-left"></i></button>
                                                     <h5 class="mb-0" id="current-month">March 2023</h5>
@@ -446,22 +462,32 @@
                                                 <h5>Your Information</h5>
                                                 <form id="customer-info-form">
                                                     @csrf
+                                                    @php
+                                                            $user = Auth::user();
+                                                        @endphp
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label for="customer-name" class="form-label">Full
                                                                 Name</label>
-                                                            <input type="text" class="form-control" id="customer-name"
+                                                            <input type="text" class="form-control"
+                                                                id="customer-name"
+                                                                value="{{ ($user && $user->hasAnyRole('user')) ? $user->name : '' }}"
                                                                 required>
                                                         </div>
+
                                                         <div class="col-md-6">
-                                                            <label for="customer-email" class="form-label">Email</label>
+                                                            <label for="customer-email"
+                                                                class="form-label">Email</label>
                                                             <input type="email" class="form-control"
-                                                                id="customer-email" required>
+                                                                id="customer-email"
+                                                                value="{{ ($user && $user->hasAnyRole('user')) ? $user->email : '' }}"
+                                                                required>
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <label for="customer-phone" class="form-label">Phone</label>
+                                                            <label for="customer-phone"
+                                                                class="form-label">Phone</label>
                                                             <input type="tel" class="form-control"
-                                                                id="customer-phone" required>
+                                                                id="customer-phone" value="{{ ($user && $user->hasAnyRole('user')) ? $user->phone : '' }}" required>
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="customer-notes" class="form-label">Notes
@@ -513,40 +539,16 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
                 </div>
             </div>
         </div>
     </div>
-    {{-- <div class="modal fade" id="bookingSuccessModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title">Booking Confirmed!</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center p-4">
-                    <i class="bi bi-check-circle text-success" style="font-size: 4rem;"></i>
-                    <h4 class="mt-3">Thank You!</h4>
-                    <p>Your appointment has been successfully booked.</p>
-                    <div class="alert alert-info mt-3">
-                        <p class="mb-0">A confirmation email has been sent to your email address.</p>
-                    </div>
-                    <div class="booking-details mt-4 text-start">
-                        <h5>Booking Details:</h5>
-                        <div id="modal-booking-details"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-@endsection
-@section('script')
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -1154,4 +1156,6 @@
             }
         });
     </script>
-@endsection
+</body>
+
+</html>
