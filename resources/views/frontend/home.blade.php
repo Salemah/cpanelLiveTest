@@ -25,10 +25,10 @@
                                     <div class="fpw-overlay">
                                         <div class="fpwo-wrap">
                                             <div class="fpwow-icons">
-                                                <a href="{{ $team->facebook }}"><i class="fa fa-facebook fa-lg"></i></a>
+                                                {{-- <a href="{{ $team->facebook }}"><i class="fa fa-facebook fa-lg"></i></a>
                                                 <a href="{{ $team->twitter }}"><i class="fa fa-twitter fa-lg"></i></a>
-                                                <a href="{{ $team->linkedin }}"><i class="fa fa-linkedin fa-lg"></i></a>
-                                                 <a class="" title="Make Appointment" href="{{ route('frontend.team_details',['id' => $team->id]) }}"><i class="fa-regular fa-calendar-check"></i></a>
+                                                <a href="{{ $team->linkedin }}"><i class="fa fa-linkedin fa-lg"></i></a> --}}
+                                                 <a class="text-dark" title="Make Appointment" href="{{ route('frontend.team_details',['id' => $team->id]) }}">Make Appointment</a>
                                                 {{-- <a href="#"><i class="fa fa-pinterest fa-lg"></i></a> --}}
                                             </div>
                                         </div>
