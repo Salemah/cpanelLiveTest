@@ -9,8 +9,11 @@ use App\Mail\DemoMail;
 use App\Mail\InvoiceMail;
 use App\Models\Appointment;
 use App\Models\CompanySetting;
+use App\Models\PaymentReceive;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AppointmentController extends Controller
@@ -127,6 +130,23 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($request->appointment_id);
         $appointment->status = $request->status;
         $appointment->save();
+
+        if($request->status == 'Confirmed'){
+
+
+            $paymentReceive = PaymentReceive::firstOrCreate(
+                ['appointment_id' => $appointment->id], // only check this field
+                [
+                    'amount' => $appointment->amount,                 // values to set if creating
+                    'added_by' => $appointment->id,
+                    'user_id' => $appointment->user_id,
+                    'appointment_id' => Auth::id(),
+                    'payment_date' => Carbon::now(),
+                    'team_id' => $appointment->team_id,
+
+                ]
+            );
+        }
 
         event(new StatusUpdated($appointment));
 

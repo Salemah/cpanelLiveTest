@@ -14,9 +14,7 @@
                                 </ol>
                             </nav>
                         </div>
-                        <form id="appointmentStatusForm" method="POST"
-                            action="{{ route('admin.appointments.update.status') }}">
-                            @csrf
+
                             <input type="hidden" name="appointment_id" id="modalAppointmentId">
 
                             <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -39,27 +37,27 @@
                                             <p><strong>Notes:</strong> <span id="modalNotes">N/A</span></p>
                                             <p><strong>Current Status:</strong> <span id="modalStatusBadge">N/A</span>
                                             </p>
+                                            {{-- <p><strong>Current Status:</strong> <span id="modalStatus">N/A</span>
+                                            </p> --}}
 
 
-                                            <div class="form-group ">
+                                            {{-- <div class="form-group ">
                                                 <label><strong>Status:</strong></label>
-                                                <select name="status" class="form-control" id="modalStatusSelect">
+                                                <select name="status" class="form-control" id="modalStatusSelect" readonly>
                                                     <option value="Pending payment">Pending payment</option>
                                                     <option value="Processing">Processing</option>
                                                     <option value="Confirmed">Confirmed</option>
                                                     <option value="Cancelled">Cancelled</option>
                                                     <option value="Completed">Completed</option>
                                                     <option value="On Hold">On Hold</option>
-                                                    {{-- <option value="Rescheduled">Rescheduled</option> --}}
+
                                                     <option value="No Show">No Show</option>
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="submit"
-                                                onclick="return confirm('Are you sure you want to update booking status?')"
-                                                class="btn btn-danger">Update Status</button>
+
 
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
@@ -68,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        
                         <div class="">
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -253,6 +251,7 @@
             $('#modalStartTime').text($(this).data('start'));
             $('#modalAmount').text($(this).data('amount'));
             $('#modalNotes').text($(this).data('notes'));
+            $('#modalStatus').text($(this).data('nostatustes'));
 
             // Set status select dropdown
             var status = $(this).data('status');

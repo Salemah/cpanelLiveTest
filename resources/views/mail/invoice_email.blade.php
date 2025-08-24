@@ -96,8 +96,7 @@
       </div>
 
       <p>
-        You can login to your client area to view and pay the invoice at
-        <a href="https://control.putulhost.com/viewinvoice.php?id=188640">https://control.putulhost.com/viewinvoice.php?id=188640</a>
+        You can login to your client area to view and pay the invoice or Call Us Payment Confirmation</a>
       </p>
 
       <p>Regards, <br>

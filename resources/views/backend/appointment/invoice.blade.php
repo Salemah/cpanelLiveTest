@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,19 +94,109 @@
             background: #28a745;
         }
     </style>
+
+
+    <style>
+/* .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  justify-content: space-between;
+} */
+.container {
+  display: flex;
+  justify-content:space-between !important; /* left & right with space between */
+  gap: 2rem; /* optional extra space */
+}
+
+.column {
+  flex: 1;             /* makes them equal width */
+  margin: 0 0.5rem;    /* optional spacing */
+  background: #f0f0ff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.column {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: hsla(240, 61%, 90%, 0);
+}
+
+
+    </style>
 </head>
 
 <body>
 
     <div class="invoice-box">
+        <a role="button" style="
+                display: inline-block;
+                outline: 0;
+
+                cursor: pointer;
+                border: none;
+                 padding: 0 13px;
+                height: 20px;
+                line-height: 20px;
+                border-radius: 7px;
+                font-weight: 400;
+                font-size: 16px;
+                background: #da5656;
+                color: #ffffff;
+                text-decoration:none;
+                box-shadow: 0 4px 14px 0 rgb(0 0 0 / 10%);
+                transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+                :hover{
+                    background: rgba(255,255,255,0.9);
+                    box-shadow: 0 6px 20px rgb(93 93 93 / 23%);
+                }
+                " href="{{ route('user.appointment') }}">
+            <-Back
+        </a>
         <!-- Header -->
         <div class="invoice-header">
             <img src="{{ asset('arc.jpg') }}" alt="Logo">
             <div>
-                <h2>Invoice # {{$data['appointment']->booking_id}} <span class="invoice-status">{{$data['appointment']->status}}</span></h2>
-                <p><strong>@if ($data['appointment']->status != 'Confirmed')Due Date @else Paid @endif:</strong> {{$data['appointment']->booking_date}}</p>
+                @if ($data['appointment']->status != 'Confirmed')
+                <a href=""
+                style="
+                display: inline-block;
+                outline: 0;
+
+                cursor: pointer;
+                border: none;
+                padding: 0 56px;
+                height: 45px;
+                line-height: 45px;
+                border-radius: 7px;
+                text-decoration:none;
+                font-weight: 400;
+                font-size: 16px;
+                background: #ff0202;
+                color: #ffffff;
+                box-shadow: 0 4px 14px 0 rgb(0 0 0 / 10%);
+                transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+                :hover{
+                    background: rgba(255,255,255,0.9);
+                    box-shadow: 0 6px 20px rgb(93 93 93 / 23%);
+                }
+                ">
+                Pay Now</a>
+                @endif
+                <h2>Invoice # {{ $data['appointment']->booking_id }} </h2>
+                <p><strong>
+                        @if ($data['appointment']->status != 'Confirmed')
+                            Due Date
+                        @else
+                            Paid
+                        @endif:
+                    </strong> {{ $data['appointment']->booking_date }}</p>
+                    <p><span
+                        class="invoice-status">{{ $data['appointment']->status }}</span></p>
             </div>
         </div>
+
 
         <!-- Invoiced To -->
         <div class="section">
@@ -117,15 +204,15 @@
                 <tr>
                     <td>
                         <strong>Invoiced To</strong><br>
-                        {{$data['appointment']->name}}<br>
+                        {{ $data['appointment']->name }}<br>
 
                     </td>
                     <td style="text-align:right">
                         <strong>Pay To</strong><br>
-                        {{$data['Setting']->title}}<br>
-                        {{$data['Setting']->address}}<br>
-                        Email: {{$data['Setting']->email}}<br>
-                        Call: {{$data['Setting']->phone}} (10AM–8PM)
+                        {{ $data['Setting']->title }}<br>
+                        {{ $data['Setting']->address }}<br>
+                        Email: {{ $data['Setting']->email }}<br>
+                        Call: {{ $data['Setting']->phone }} (10AM–8PM)
                     </td>
                 </tr>
             </table>
@@ -140,13 +227,14 @@
                     <th style="text-align:right">Amount</th>
                 </tr>
                 <tr>
-                    <td>Consultation with Senior Lawyer – Family Law {{$data['appointment']->booking_date}} {{$data['appointment']->booking_time}}</td>
-                    <td style="text-align:right">TK {{number_format($data['appointment']->amount,2)}} BDT</td>
-                </tr> BDT</td>
+                    <td>Consultation with Senior Lawyer – Family Law {{ $data['appointment']->booking_date }}
+                        {{ $data['appointment']->booking_time }}</td>
+                    <td style="text-align:right">TK {{ number_format($data['appointment']->amount, 2) }} BDT</td>
                 </tr>
+
                 <tr>
                     <td class="totals"><strong>Sub Total</strong></td>
-                    <td style="text-align:right">TK {{number_format($data['appointment']->amount,2)}} BDT</td>
+                    <td style="text-align:right">TK {{ number_format($data['appointment']->amount, 2) }} BDT</td>
                 </tr>
                 <tr>
                     <td class="totals">2.00% Transaction Fee</td>
@@ -155,30 +243,31 @@
 
                 <tr>
                     <td class="totals"><strong>Total</strong></td>
-                    <td style="text-align:right"><strong>TK {{number_format($data['appointment']->amount,2)}} BDT</strong></td>
+                    <td style="text-align:right"><strong>TK {{ number_format($data['appointment']->amount, 2) }}
+                            BDT</strong></td>
                 </tr>
             </table>
             <p style="font-size:12px; margin-top:5px;">* Indicates a taxed item.</p>
         </div>
 
         @if ($data['appointment']->status == 'Confirmed')
-        <div class="section">
-            <h4>Transactions</h4>
-            <table>
-                <tr>
-                    <th>Transaction Date</th>
-                    <th>Gateway</th>
-                    <th>Transaction ID</th>
-                    <th>Amount</th>
-                </tr>
-                <tr>
-                    <td>22/08/2025</td>
-                    <td>bKash Payment</td>
-                    <td>CHM6P7F4D2</td>
-                    <td>TK 30.00 BDT</td>
-                </tr>
-            </table>
-        </div>
+            <div class="section">
+                <h4>Transactions</h4>
+                <table>
+                    <tr>
+                        <th>Transaction Date</th>
+                        <th>Gateway</th>
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td>22/08/2025</td>
+                        <td>bKash Payment</td>
+                        <td>CHM6P7F4D2</td>
+                        <td>TK 30.00 BDT</td>
+                    </tr>
+                </table>
+            </div>
         @endif
         <!-- Transactions -->
 
