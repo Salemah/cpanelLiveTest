@@ -123,7 +123,7 @@ class AppointmentController extends Controller
     {
         do {
             // Example: BK-20250824-ABCD1234
-            $bookingId = 'BK-'. strtoupper(Str::random(8));
+            $bookingId = 'BK-'. random_int(10000000, 99999999);
         } while (Appointment::where('booking_id', $bookingId)->exists()); // Check uniqueness
 
         return $bookingId;
