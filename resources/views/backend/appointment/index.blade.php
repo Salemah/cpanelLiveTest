@@ -256,7 +256,10 @@
                                                                 data-amount="{{ $appointment->amount }}"
                                                                 data-notes="{{ $appointment->notes }}"
                                                                 data-status="{{ $appointment->status }}">View</button>
-                                                        </td>
+
+                                                            <a href="{{ route('pdf.download',['id' => $appointment->id]) }}"
+                                                                class="btn btn-info btn-sm py-0 px-1">Invoice</a>
+                                                            </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
