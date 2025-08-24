@@ -143,7 +143,7 @@
         <div class="content">
             <p>Dear {{$mailData['name']}},</p>
             <p>
-                Your appointment has been successfully confirmed with <strong>{{$mailData['title']}}</strong>.
+                Your appointment has been successfully booked with <strong>{{$mailData['title']}}</strong>. <br> <strong style="color: red"> Please Payemnt to confirm</strong>  <br>
                 Please find your appointment details below:
             </p>
 

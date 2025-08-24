@@ -243,7 +243,6 @@
                                                             </span>
                                                         </td>
                                                         <td>
-
                                                             <button
                                                                 class="btn btn-primary btn-sm py-0 px-1 view-appointment-btn"
                                                                 data-bs-toggle="modal" data-bs-target="#appointmentModal"
