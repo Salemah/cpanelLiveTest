@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::post('change_password', [ProfileController::class, 'UserChangePassword'])->name('account.profile.change.password.insert');
 
     Route::get('my_appointment', [UserController::class, 'UserAppointment'])->name('user.appointment');
+    Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
 
 
 

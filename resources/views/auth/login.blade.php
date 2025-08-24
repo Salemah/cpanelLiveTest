@@ -370,7 +370,18 @@
 <body>
 
 
-
+    @if (session('message'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session('failed'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('failed') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="section">
         <div class="container">
 
@@ -388,22 +399,7 @@
                                     <div class="card-front">
                                         <div class="center-wrap">
                                             <div class="section text-center">
-                                                @if (session('message'))
-                                                    <div class="alert alert-info alert-dismissible fade show"
-                                                        role="alert">
-                                                        {{ session('message') }}
-                                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                @endif
-                                                @if (session('failed'))
-                                                    <div class="alert alert-danger alert-dismissible fade show"
-                                                        role="alert">
-                                                        {{ session('failed') }}
-                                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                @endif
+
                                                 <h4 class="mb-4 pb-3">Log In</h4>
                                                 <div class="form-group">
                                                     <input type="email" name="email" class="form-style"

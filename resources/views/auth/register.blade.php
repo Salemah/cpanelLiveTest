@@ -430,11 +430,11 @@
                 </div>
             @endif
             <div class="row full-height justify-content-center">
-                <div class="col-12 text-center align-self-center py-5">
+                <div class="col-12 text-center align-self-center pb-5" style="padding-bottom: 15px">
                     <div class="section pb-5 pt-5 pt-sm-2 text-center">
                         <h6 class="mb-0 pb-3"><span><img src="@if ($dashboard_settings){{ asset('/image/dashboard/' . $dashboard_settings->logo) }} @else  {{asset('logo2.png')}}@endif" alt=""></span></h6>
 
-                        <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrap mx-auto mb-5">
                             <div class="card-3d-wrapper">
                                 <div class="card-front">
                                     <div class="center-wrap">
@@ -488,10 +488,15 @@
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
-                                                {{-- <a href="#" class="btn mt-4">submit</a> --}}
+
                                                 <input type="submit" class="btn mt-4" value="Register">
                                             </form>
                                         </div>
+                                         <p class="my-3">
+        <a href="{{ route('login') }} " >
+            I already have a membership
+        </a>
+    </p>
                                     </div>
                                 </div>
 

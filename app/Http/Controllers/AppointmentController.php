@@ -6,8 +6,10 @@ use App\Events\BookingCreated;
 use App\Events\StatusUpdated;
 use App\Mail\Appointmail;
 use App\Mail\DemoMail;
+use App\Mail\InvoiceMail;
 use App\Models\Appointment;
 use App\Models\CompanySetting;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -72,10 +74,32 @@ class AppointmentController extends Controller
             'team_id' => $appointment->employee->name,
 
         ];
-        
+
         $dynamicSubject = $Setting->title . ' - Welcome ' . $request->name;
 
         Mail::to($request->email)->send(new Appointmail($mailData, $dynamicSubject));
+
+        // invoice mail send
+        $appointment = $appointment;
+
+        $data = [
+            'logo' => $Setting->logo,
+            'title' => $Setting->title,
+            'appointment' => $appointment,
+            'Setting' => $Setting,
+
+        ];
+        $datas["title"] = $Setting->title;
+
+        $datas["appointment"] = $appointment;
+
+        $datas["Setting"] = $Setting;
+
+        $pdf = Pdf::loadView('backend.appointment.invoicepdf',$datas);
+
+         $dynamicSubject = $Setting->title . ' - Booking Invoice ' . $request->name;
+        Mail::to($request->email)->send(new InvoiceMail($data, $dynamicSubject, $pdf));
+        //invoice mail end
 
 
         event(new BookingCreated($appointment));
@@ -122,5 +146,23 @@ class AppointmentController extends Controller
         event(new StatusUpdated($appointment));
 
         return back()->with('success', 'Status updated successfully');
+    }
+    public function downloadPdf(Request $request)
+    {
+        $Setting = CompanySetting::first();
+        $appointment = Appointment::findOrFail($request->id);
+        $data = [
+
+            'date'  => now()->toDateString(),
+            'logo' => $Setting->logo,
+            'title' => $Setting->title,
+            'appointment' => $appointment,
+            'Setting' => $Setting,
+
+        ];
+        return view('backend.appointment.invoice', compact('data'));
+        $pdf = Pdf::loadView('backend.appointment.invoice', $data);
+
+        return $pdf->download('appointments.pdf');
     }
 }

@@ -1,4 +1,4 @@
-@extends('backend.user_layouts.backendapp')
+@extends('backend.layouts.backendapp')
 
 @section('content')
     <div class="">
@@ -9,371 +9,276 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">My Appointment List</li>
+                                    <li class="breadcrumb-item">Home</li>
+                                    <li class="breadcrumb-item active" aria-current="page">My Apointments</li>
                                 </ol>
                             </nav>
-                            {{-- <a href="{{ route('account.sale_list') }}" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"><i class="fa fa-angle-double-left"></i> {{ __('messages.Sale List') }}</a> --}}
-                            <button class="btn btn-primary btn-sm TeamAddButton" style="float: right;margin-top:-20px;"><i
-                                    class="fa fa-plus"></i>Make Appointment</button>
+                        </div>
+                        <form id="appointmentStatusForm" method="POST"
+                            action="{{ route('admin.appointments.update.status') }}">
+                            @csrf
+                            <input type="hidden" name="appointment_id" id="modalAppointmentId">
+
+                            <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Appointment Details</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><strong>Client:</strong> <span id="modalAppointmentName">N/A</span></p>
+
+                                            <p><strong>Email:</strong> <span id="modalEmail">N/A</span></p>
+                                            <p><strong>Phone:</strong> <span id="modalPhone">N/A</span></p>
+                                            <p><strong>Staff:</strong> <span id="modalStaff">N/A</span></p>
+                                            <p><strong>Start:</strong> <span id="modalStartTime">N/A</span></p>
+                                            <p><strong>Amount:</strong> <span id="modalAmount">N/A</span></p>
+                                            <p><strong>Notes:</strong> <span id="modalNotes">N/A</span></p>
+                                            <p><strong>Current Status:</strong> <span id="modalStatusBadge">N/A</span>
+                                            </p>
+
+
+                                            <div class="form-group ">
+                                                <label><strong>Status:</strong></label>
+                                                <select name="status" class="form-control" id="modalStatusSelect">
+                                                    <option value="Pending payment">Pending payment</option>
+                                                    <option value="Processing">Processing</option>
+                                                    <option value="Confirmed">Confirmed</option>
+                                                    <option value="Cancelled">Cancelled</option>
+                                                    <option value="Completed">Completed</option>
+                                                    <option value="On Hold">On Hold</option>
+                                                    {{-- <option value="Rescheduled">Rescheduled</option> --}}
+                                                    <option value="No Show">No Show</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="submit"
+                                                onclick="return confirm('Are you sure you want to update booking status?')"
+                                                class="btn btn-danger">Update Status</button>
+
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="">
+                            @if (session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{ session('success') }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+                            <!-- Content Header (Page header) -->
+                            <!-- Content Header (Page header) -->
+
+                            <!-- Main content -->
+                            <section class="content">
+                                <div class="container-fluid">
+                                    <div class="row">
+
+
+
+
+                                        <table id="myTable" class="table table-striped projects ">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 1%">
+                                                        #
+                                                    </th>
+                                                    <th style="width: 15%">
+                                                        User
+                                                    </th>
+                                                    <th style="width: 15%">
+                                                        Email
+                                                    </th>
+                                                    <th style="width: 10%">
+                                                        Phone
+                                                    </th>
+                                                    <th style="width: 10%">
+                                                        Team
+                                                    </th>
+
+
+
+                                                    <th style="width: 10%">
+                                                        Date
+                                                    </th>
+                                                    <th style="width: 10%">
+                                                        Time
+                                                    </th>
+
+
+                                                    <th style="width: 15%" class="text-center">
+                                                        Status
+                                                    </th>
+                                                    <th style="width: 18%">
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    $statusColors = [
+                                                        'Pending payment' => '#f39c12',
+                                                        'Processing' => '#3498db',
+                                                        'Confirmed' => '#2ecc71',
+                                                        'Cancelled' => '#ff0000',
+                                                        'Completed' => '#008000',
+                                                        'On Hold' => '#95a5a6',
+                                                        'Rescheduled' => '#f1c40f',
+                                                        'No Show' => '#e67e22',
+                                                    ];
+                                                @endphp
+                                                @foreach ($appointments as $appointment)
+                                                    <tr>
+                                                        <td>
+                                                            {{ $loop->iteration }}
+                                                        </td>
+                                                        <td>
+                                                            <a>
+                                                                {{ $appointment->name }}
+                                                            </a>
+                                                            <br>
+                                                            <small>
+                                                                {{ $appointment->created_at->format('d M Y') }}
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            {{ $appointment->email }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $appointment->phone }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $appointment->employee->user->name }}
+                                                        </td>
+
+
+                                                        <td>
+                                                            {{ $appointment->booking_date }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $appointment->booking_time }}
+                                                        </td>
+                                                        <td>
+                                                            @php
+                                                                $status = $appointment->status;
+                                                                $color = $statusColors[$status] ?? '#7f8c8d';
+                                                            @endphp
+                                                            <span class="badge px-2 py-1"
+                                                                style="background-color: {{ $color }}; color: white;">
+                                                                {{ $status }}
+                                                            </span>
+                                                        </td>
+                                                        <td>
+
+                                                            <button
+                                                                class="btn btn-primary btn-sm py-0 px-1 view-appointment-btn"
+                                                                data-bs-toggle="modal" data-bs-target="#appointmentModal"
+                                                                data-id="{{ $appointment->id }}"
+                                                                data-name="{{ $appointment->name }}"
+                                                                data-email="{{ $appointment->email }}"
+                                                                data-phone="{{ $appointment->phone }}"
+                                                                data-employee="{{ $appointment->employee->user->name }}"
+                                                                data-start="{{ $appointment->booking_date . ' ' . $appointment->booking_time }}"
+                                                                data-amount="{{ $appointment->amount }}"
+                                                                data-notes="{{ $appointment->notes }}"
+                                                                data-status="{{ $appointment->status }}">View</button>
+
+                                                            <a href="{{ route('pdf.download',['id' => $appointment->id]) }}"
+                                                                class="btn btn-info btn-sm py-0 px-1">Invoice</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+
+
+                                        <!-- /.card-body -->
+
+
+                                        <!-- /.col -->
+
+                                    </div>
+                                    <!-- /.row -->
+                                </div><!-- /.container-fluid -->
+                            </section>
                         </div>
 
-                        <div class="card-block container">
-                            <div class="table-responsive" id="tab">
-                                <table class="table table-striped table-bordered table-hover"
-                                    style="border: solid 1px rgba(255, 193, 193, 0.1);" id="team_table">
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <div class="modal fade" id="TeamAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <form id="team_insert_update" action="{{ route('admin.account.team.insert') }}" accept-charset="utf-6"
-                enctype="multipart/form-data" method="post" class="form-horizontal validatable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Team Add</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <input type="hidden" name="id" value="" id="hidden-id" />
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Name:</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Positions:</label>
-                                <input type="text" name="positions" id="positions" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Fees:</label>
-                                <input type="text" name="fees" id="fees" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Legal Area:</label>
-                                <select name="legal_area_id[]" id="legal_area_id" class="form-control" multiple="multiple">
-                                    <option>--Select Legal Area--</option>
-                                    {{-- @foreach ($legalareas as $legalarea)
-                                            <option value="{{ $legalarea->id}}">{{ $legalarea->name}}</option>
-                                        @endforeach --}}
-                                </select>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Email:</label>
-                                <input type="text" name="email" id="email" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Phone:</label>
-                                <input type="text" name="phone" id="phone" class="form-control">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Password:</label>
-                                <input type="password" name="password" class="form-control"placeholder="Password"
-                                    id="password">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Facebook:</label>
-                                <input type="text" name="facebook" class="form-control"placeholder="facebook"
-                                    id="facebook">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Twitter:</label>
-                                <input type="text" name="twitter" class="form-control"placeholder="twitter"
-                                    id="twitter">
-                            </div>
-                            <div class="col-6 mb-3">
-                                <label for="recipient-name" class="col-form-label">Linkedin:</label>
-                                <input type="text" name="linkedin" class="form-control"placeholder="linkedin"
-                                    id="linkedin">
-                            </div>
-                            <div class="form-group col-10 mb-2">
-                                <label for="favicon">Upload Image<span class="text-danger">*</span> <span
-                                        class="text-danger">( Size: 500*500)</span></label>
-                                <input type="file" id="image" data-height="290" class="dropify form-control "
-                                    name="image">
-
-                            </div>
-                            <div class="form-group col-2">
-                                <img src="" id="imageedit" style="width: 40px; height:auto;" alt="">
-
-
-                            </div>
-                            <div class="form-group col-6 col-sm-6 col-md-6 mb-2">
-                                <label for="favicon">Status<span class="text-danger">*</span></label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="">Select Status</option>
-                                    <option value="Active" selected>Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
 @endsection
 
 @section('script')
     <script>
         $(document).ready(function() {
+            $(".alert").delay(6000).slideUp(300);
+        });
+    </script>
 
-
-            $('#team_table').DataTable({
-                processing: true,
-                responsive: true,
-                serverSide: true,
-                ajax: {
-                    url: "{{ route('admin.account.team.data') }}",
-                    type: 'GET',
-                    cache: false
-                },
-                columns: [{
-                        title: 'SL',
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        title: 'Name',
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        title: 'Position',
-                        data: 'positions',
-                        name: 'positions'
-                    },
-                    {
-                        title: 'Fees',
-                        data: 'fees',
-                        name: 'fees'
-                    },
-                    {
-                        title: 'Status',
-                        data: 'status',
-                        name: 'status'
-                    },
-                    {
-                        title: 'Action',
-                        data: 'action',
-                        name: 'action'
-                    }
-                ]
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                responsive: true
             });
 
-            $('#team_insert_update').ajaxForm({
-                beforeSend: formBeforeSend,
-                beforeSubmit: formBeforeSubmit,
-                error: formError,
-                success: function(responseText, statusText, xhr, $form) {
-                    formSuccess(responseText, statusText, xhr, $form);
-                    $('#team_table').DataTable().draw(true);
-
-                    $("#TeamAdd").modal('hide');
-                    $('#hidden-id').setAttribute("disabled");
-
-                },
-                clearForm: true,
-                resetForm: true
-            });
-
-            $(document).on('click', '.TeamAddButton', function() {
-
-                $("#customer_insert_update").trigger("reset");
-                $('#hidden-id').attr("disabled", "true");
-                $("#TeamAdd").modal('show');
-                var customerId = "T" + generator.TeamAdd();
-                $('input[name^="contact_code"]').val(customerId);
-
-            });
-
-            $(document).on('click', '.tableDelete', function() {
-
-                swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        let Id = $(this).data('id'); // Retrieve the ID for deletion
-                        $.ajax({
-                            url: "{{ route('admin.account.team.insert') }}",
-                            type: "POST",
-                            data: {
-                                _token: "{{ csrf_token() }}", // Include CSRF token for security
-                                delete: Id
-                            },
-                            success: function(response) {
-                                // Assuming the deletion was successful, refresh the table
-                                $('#team_table').DataTable().draw(true);
-
-                                Swal.fire("Deleted!",
-                                    "The item has been deleted successfully.", {
-                                        icon: "success",
-                                    });
-                            },
-                            error: function(xhr) {
-                                // Handle error
-                                Swal.fire("Error!",
-                                    "There was an issue deleting the item.", "error"
-                                );
-                            }
-                        });
-                    } else {
-                        Swal.fire("Your item is safe!");
-                    }
-                });
-            });
+        });
+    </script>
 
 
 
-            $(document).on('click', '.tableEdit', function() {
-                let Id = $(this).data('id');
-                $('#hidden-id').removeAttr("disabled");
-                $('#hidden-id').val(Id);
-                $(this).ajaxSubmit({
-                    error: formError,
-                    data: {
-                        "id": Id
-                    },
-                    dataType: 'json',
-                    method: 'GET',
-                    url: "{{ route('admin.account.team.edit') }}",
-                    success: function(responseText) {
+    <script>
+        $(document).on('click', '.view-appointment-btn', function() {
 
-                        $('input[name^="name"]').val(responseText.data.name);
-                        $('input[name^="email"]').val(responseText.data.email);
-                        $('input[name^="phone"]').val(responseText.data.phone);
-                        $('input[name^="fees"]').val(responseText.data.fees);
-                        $('input[name^="positions"]').val(responseText.data.positions);
-                        $('textarea[name^="address"]').val(responseText.data.address);
-                        var selectedLegalAreas = responseText.legal_areas;
+            // Set modal fields
+            $('#modalAppointmentId').val($(this).data('id'));
+            $('#modalAppointmentName').text($(this).data('name'));
 
-                        $('#legal_area_id').val(null).trigger('change');
+            $('#modalEmail').text($(this).data('email'));
+            $('#modalPhone').text($(this).data('phone'));
+            $('#modalStaff').text($(this).data('employee'));
+            $('#modalStartTime').text($(this).data('start'));
+            $('#modalAmount').text($(this).data('amount'));
+            $('#modalNotes').text($(this).data('notes'));
 
-                        $.each(selectedLegalAreas, function(index, legalArea) {
-                            var option = new Option(legalArea.name, legalArea.id, true,
-                                true);
-                            $('#legal_area_id').append(option).trigger('change');
-                        });
+            // Set status select dropdown
+            var status = $(this).data('status');
+            $('#modalStatusSelect').val(status);
 
-                        $('select[name^="status"]').val(responseText.data.status);
+            // Set status badge
+            var statusColors = {
+                'Pending payment': '#f39c12',
+                'Processing': '#3498db',
+                'Confirmed': '#2ecc71',
+                'Cancelled': '#ff0000',
+                'Completed': '#008000',
+                'On Hold': '#95a5a6',
+                'Rescheduled': '#f1c40f',
+                'No Show': '#e67e22',
+            };
 
-
-                        // if (responseText.data.contact_category_id) {
-                        //     var newOption = new Option(responseText.contact_category_name,
-                        //         responseText.data.contact_category_id, false, false);
-                        //     $('select[name^="contact_category_id"]').empty().append(newOption);
-                        // }
-                        const baseUrl = "{{ asset('/') }}";
-                        $('select[name^="status"]').val(responseText.data.status);
-                        let imageName = responseText.data.image;
-                        let imageUrl = baseUrl + imageName;
-                        // Get the Dropify element
-                        // let drEvent = $('#image').dropify();
-
-                        // // Clear the current Dropify instance
-                        // drEvent = drEvent.data('dropify');
-                        // drEvent.resetPreview();
-                        // drEvent.clearElement();
-                        // Destroy the existing Dropify instance
-                        //$('#image').dropify().destroy();
-
-                        console.log(imageUrl);
-                        // Set the new data-default-file attribute
-                        $('#imageedit').attr('src', imageUrl);
-
-                        // Reinitialize Dropify with the updated data-default-file
-                        // $('#image').dropify({
-                        //     defaultFile: imageUrl
-                        // });
-
-                        $("#TeamAdd").modal('show');
-                    }
-                });
-            });
-
-            // function IDGenerator(value = 10) {
-
-            //     this.length = value;
-            //     this.timestamp = +new Date;
-
-            //     var _getRandomInt = function(min, max) {
-            //         return Math.floor(Math.random() * (max - min + 1)) + min;
-            //     }
-
-            //     this.generate = function() {
-            //         var ts = this.timestamp.toString();
-            //         var parts = ts.split("").reverse();
-            //         var id = "";
-
-            //         for (var i = 0; i < this.length; ++i) {
-            //             var index = _getRandomInt(0, parts.length - 1);
-            //             id += parts[index];
-            //         }
-
-            //         return id;
-            //     }
-            // }
-
-
-
-            $('#legal_area_id').select2({
-                dropdownParent: $('#TeamAdd'),
-                placeholder: 'Select Legal Area',
-                ajax: {
-                    url: '{{ route('admin.account.legal_area.search') }}',
-                    dataType: 'json',
-                    type: "GET",
-                    data: function(data) {
-                        return {
-                            searchTerm: data.term // search term
-                        };
-                    },
-                    processResults: function(response) {
-                        return {
-                            results: response
-                        };
-                    },
-                    cache: true
-                }
-
-            });
-            $('#TeamAdd').on('hidden.bs.modal', function() {
-                $('#team_insert_update')[0].reset(); // Clear the form data
-            });
-            $('.modal').on('show.bs.modal', function() {
-                let drEvent = $('#image').dropify();
-                drEvent = drEvent.data('dropify');
-                drEvent.resetPreview();
-                drEvent.clearElement();
-            });
-
-
-
-
-
-
-
-
+            var badgeColor = statusColors[status] || '#7f8c8d';
+            $('#modalStatusBadge').html(
+                `<span class="badge px-2 py-1" style="background-color: ${badgeColor}; color: white;">${status}</span>`
+            );
+        });
+    </script>
+    <script>
+        document.getElementById('downloadPdf').addEventListener('click', function() {
+            window.location.href = "{{ route('pdf.download') }}";
         });
     </script>
 @endsection
