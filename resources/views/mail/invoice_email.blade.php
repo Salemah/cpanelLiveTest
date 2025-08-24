@@ -98,7 +98,7 @@
       <p>
         You can login to your client area to view and pay the invoice or Call Us Payment Confirmation</a>
       </p>
-      <p>Or pay the invoice at <a href="{{ route('pdf.download', ['id' => $data['appointment']->id]) }}"></a></p>
+      <p>Or pay the invoice at <a href="{{ route('pdf.download', ['id' => $data['appointment']->id]) }}">{{ route('pdf.download', ['id' => $data['appointment']->id]) }}</a></p>
 
       <p>Regards, <br>
       System Administrator <br>
