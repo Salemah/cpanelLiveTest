@@ -89,7 +89,7 @@
             display: block;
             color: #005a8b;
             text-decoration: none;
-            margin: 10px 0;
+            margin: 5px 0;
             font-weight: bold;
         }
 
@@ -169,10 +169,10 @@
             <p>
                 You can access our support resources below:
             </p>
-            <div class="support-links">
-                <a href="{{$mailData['website']}}/knowledgebase">Knowledgebase</a>
-                <a href="{{$mailData['website']}}/support">Submit a Ticket</a>
-            </div>
+
+                <p>Call: {{$mailData['Setting']->phone}} </p>
+              <p> Email: {{$mailData['Setting']->email}}</p>
+
 
             <p>--<br>{{$mailData['title']}}<br>
                 <a href="{{$mailData['website']}}">{{$mailData['website']}}</a>

@@ -151,7 +151,7 @@
                     background: rgba(255,255,255,0.9);
                     box-shadow: 0 6px 20px rgb(93 93 93 / 23%);
                 }
-                " href="{{ route('user.appointment') }}">
+                " href="{{ url('our_team') }}">
             <-Back
         </a>
         <!-- Header -->

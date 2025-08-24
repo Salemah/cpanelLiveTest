@@ -56,8 +56,8 @@ class AppointmentController extends Controller
 
 
         // Generate unique booking ID
-        $validated['booking_id'] = 'BK-' . strtoupper(uniqid());
-
+        // $validated['booking_id'] = 'BK-' . strtoupper(uniqid());
+        $validated['booking_id'] = $this->generateBookingId();
 
         $appointment = Appointment::create($validated);
         $Setting = CompanySetting::first();
@@ -67,6 +67,8 @@ class AppointmentController extends Controller
             'website' => $Setting->website,
             'facebook' => $Setting->facebook,
             'instagram' => $Setting->instagram,
+            'Setting' => $Setting,
+
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -111,9 +113,21 @@ class AppointmentController extends Controller
             'success' => true,
             'message' => 'Appointment booked successfully!',
             'booking_id' => $appointment->booking_id,
-            'appointment' => $appointment
+            'appointment' => $appointment,
+            'appointment_id' => $appointment->id,
         ]);
     }
+
+    private function generateBookingId()
+    {
+        do {
+            // Example: BK-20250824-ABCD1234
+            $bookingId = 'BK-'. strtoupper(Str::random(8));
+        } while (Appointment::where('booking_id', $bookingId)->exists()); // Check uniqueness
+
+        return $bookingId;
+    }
+
     public function index()
     {
         $appointments = Appointment::with('employee')->latest()->get();
@@ -131,7 +145,7 @@ class AppointmentController extends Controller
         $appointment->status = $request->status;
         $appointment->save();
 
-    
+
         if($request->status == 'Confirmed'){
 
 

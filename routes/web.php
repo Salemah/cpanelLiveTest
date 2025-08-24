@@ -68,7 +68,7 @@ Route::post('contact_us_message_insert', [ContactUsMessageController::class, 'Co
 
 Route::post('signin-process', [LoginController::class, 'SignInProcess'])->name('sign-in.process');
 Route::post('signUp-process', [LoginController::class, 'SignUpProcess'])->name('sign-Up.process');
-
+Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
 Route::middleware('auth')->group(function () {
 
     Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.dashboard');
@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::post('change_password', [ProfileController::class, 'UserChangePassword'])->name('account.profile.change.password.insert');
 
     Route::get('my_appointment', [UserController::class, 'UserAppointment'])->name('user.appointment');
-    Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
+    // Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
 
 
 

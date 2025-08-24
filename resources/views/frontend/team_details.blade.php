@@ -274,6 +274,26 @@
 
         }
     </style>
+    <style>
+        /* Default outline color */
+        .custom-checkbox {
+            border: 3px solid #ff0000;
+            /* blue outline */
+        }
+
+        /* When checked */
+        .custom-checkbox:checked {
+            background-color: #0d6efd;
+            /* fill color */
+            border-color: #0d6efd;
+            /* border stays same as fill */
+        }
+
+        /* When focused (outline glow) */
+        .custom-checkbox:focus {
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+    </style>
 </head>
 
 <body>
@@ -315,8 +335,6 @@
     <section aria-label="section">
         <div class="container">
             <div class="row">
-
-
                 <div class="col-lg-12 col-md-12 col-sm-12  wow fadeInRight" data-wow-delay=".4s">
                     <div class="f-profile text-center">
 
@@ -421,18 +439,7 @@
                                             <h5 class="mb-0">Booking Summary</h5>
                                         </div>
                                         <div class="card-body">
-                                            {{-- <div class="summary-item">
-                                                <div class="row">
-                                                    <div class="col-md-4 text-muted">Category:</div>
-                                                    <div class="col-md-8" id="summary-category"></div>
-                                                </div>
-                                            </div> --}}
-                                            {{-- <div class="summary-item">
-                                                <div class="row">
-                                                    <div class="col-md-4 text-muted">Service:</div>
-                                                    <div class="col-md-8" id="summary-service"></div>
-                                                </div>
-                                            </div> --}}
+
                                             <div class="summary-item">
                                                 <div class="row">
                                                     <div class="col-md-4 text-muted">Team Member:</div>
@@ -463,15 +470,15 @@
                                                 <form id="customer-info-form">
                                                     @csrf
                                                     @php
-                                                            $user = Auth::user();
-                                                        @endphp
+                                                        $user = Auth::user();
+                                                    @endphp
                                                     <div class="row g-3">
                                                         <div class="col-md-6">
                                                             <label for="customer-name" class="form-label">Full
                                                                 Name</label>
                                                             <input type="text" class="form-control"
                                                                 id="customer-name"
-                                                                value="{{ ($user && $user->hasAnyRole('user')) ? $user->name : '' }}"
+                                                                value="{{ $user && $user->hasAnyRole('user') ? $user->name : '' }}"
                                                                 required>
                                                         </div>
 
@@ -480,20 +487,62 @@
                                                                 class="form-label">Email</label>
                                                             <input type="email" class="form-control"
                                                                 id="customer-email"
-                                                                value="{{ ($user && $user->hasAnyRole('user')) ? $user->email : '' }}"
+                                                                value="{{ $user && $user->hasAnyRole('user') ? $user->email : '' }}"
                                                                 required>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <label for="customer-phone"
                                                                 class="form-label">Phone</label>
                                                             <input type="tel" class="form-control"
-                                                                id="customer-phone" value="{{ ($user && $user->hasAnyRole('user')) ? $user->phone : '' }}" required>
+                                                                id="customer-phone"
+                                                                value="{{ $user && $user->hasAnyRole('user') ? $user->phone : '' }}"
+                                                                required>
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="customer-notes" class="form-label">Notes
                                                                 (Optional)</label>
                                                             <textarea class="form-control" id="customer-notes" rows="3"></textarea>
                                                         </div>
+                                                        <div class="col-12">
+                                                            <label for="terms" class="form-label fw-bold">Terms &
+                                                                Conditions</label>
+                                                            <div class="border p-3 rounded bg-light"
+                                                                style="text-align: left">
+                                                                <p style="color: red">
+                                                                    <strong>By booking a consultation with our law firm,
+                                                                        you agree to the following:</strong>
+                                                                </p>
+                                                                <ul>
+                                                                    <li>All consultations are confidential and protected
+                                                                        under attorney-client privilege.</li>
+                                                                    <li>Consultation fees are non-refundable once the
+                                                                        session has been scheduled.</li>
+                                                                    <li>Any advice provided is based on the information
+                                                                        you share with us during the session.</li>
+                                                                    <li>We do not guarantee outcomes in legal matters,
+                                                                        as results depend on case-specific factors.</li>
+                                                                    <li>Clients are responsible for providing accurate
+                                                                        and truthful information.</li>
+                                                                </ul>
+                                                                <p>
+                                                                    Please review these terms carefully before
+                                                                    confirming your appointment.
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="form-check ">
+                                                                <input class="form-check-input custom-checkbox"
+                                                                    type="checkbox" value=""
+                                                                    id="accept-terms">
+                                                                <label class="form-check-label"
+                                                                    for="accept-terms">
+                                                                    I have read and agree to the Terms & Conditions.
+                                                                </label>
+
+                                                            </div>
+
+                                                        </div>
+
                                                     </div>
                                                 </form>
                                             </div>
@@ -530,6 +579,7 @@
                     <i class="bi bi-check-circle text-success" style="font-size: 4rem;"></i>
                     <h4 class="mt-3">Thank You!</h4>
                     <p>Your appointment has been successfully booked.</p>
+                    <p>Please Wait .. Redirecting you to the payment page....</p>
                     <div class="alert alert-info mt-3">
                         <p class="mb-0">A confirmation email has been sent to your email address.</p>
                     </div>
@@ -546,7 +596,7 @@
         </div>
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -1044,6 +1094,18 @@
             // function submitBooking() {
 
             function submitBooking() {
+
+                if (!$('#accept-terms').is(':checked')) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'You must agree to the Terms & Conditions before booking.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                    //alert("You must agree to the Terms & Conditions before booking.");
+                    return; // stop function here
+                }
+
                 // Get form data
                 const form = $('#customer-info-form');
                 const csrfToken = form.find('input[name="_token"]').val(); // Get CSRF token from form
@@ -1108,7 +1170,11 @@
                         successModal.show();
 
                         // Reset form after delay
-                        setTimeout(resetBooking, 1000);
+                        setTimeout(resetBooking, 500);
+
+                        setTimeout(() => {
+    window.location.href = "/download-pdf/" + response.appointment_id;
+}, 1000);
                     },
                     error: function(xhr) {
                         let errorMessage = 'Booking failed. Please try again.';
