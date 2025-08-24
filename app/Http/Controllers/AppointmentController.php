@@ -131,6 +131,7 @@ class AppointmentController extends Controller
         $appointment->status = $request->status;
         $appointment->save();
 
+    
         if($request->status == 'Confirmed'){
 
 

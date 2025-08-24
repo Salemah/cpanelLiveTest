@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LawCategoryController;
 use App\Http\Controllers\LegalAreaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaymentReceiveController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReputationController;
 use App\Http\Controllers\SlotController;
@@ -194,6 +195,8 @@ Route::middleware('auth')->group(function () {
         Route::post('slot_insert', [SlotController::class, 'SlotInsert'])->name('account.slot.insert');
 
 
+        Route::get('payment_recieve/{id?}', [PaymentReceiveController::class, 'index'])->name('account.payment_receive');
+        Route::get('payment_recieve_data', [PaymentReceiveController::class, 'PaymentReceiveData'])->name('account.payment_recieve.data');
     });
 
     //like dislike

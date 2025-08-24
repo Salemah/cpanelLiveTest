@@ -66,6 +66,11 @@
                      </a>
                  </li>
                  <li class="menu-item">
+                     <a href="{{ route('admin.account.payment_receive') }}" class="menu-link">
+                         <div data-i18n="Payment Receive">Payment Receive</div>
+                     </a>
+                 </li>
+                 <li class="menu-item">
                      <a href="{{ route('admin.account.slot') }}" class="menu-link">
                          <div data-i18n="Schedule">Schedule</div>
                      </a>
