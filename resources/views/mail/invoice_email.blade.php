@@ -80,7 +80,7 @@
       <h4>Invoice Items</h4>
       <div class="invoice-items">
         <p>
-    Consultation with Senior Lawyer – Family Law <br>
+    Consultation with {{$data['appointment']->employee->positions}} <br>
     Client: {{$data['appointment']->name}} <br>
     Appointment Date: <b> {{$data['appointment']->booking_date}} {{$data['appointment']->booking_time}} </b><br>
     + Document Review <br>
@@ -90,7 +90,7 @@
           -------------------------------------------<br>
           Sub Total: TK {{number_format($data['appointment']->amount,2)}} BDT <br>
           2.00% Transaction Fee: TK 0.00 BDT <br>
-          Credit: TK 0.00 BDT <br>
+
           <strong>Total: {{number_format($data['appointment']->amount,2)}} BDT</strong>
         </p>
       </div>
@@ -98,6 +98,7 @@
       <p>
         You can login to your client area to view and pay the invoice or Call Us Payment Confirmation</a>
       </p>
+      <p>Or pay the invoice at <a href="{{ route('pdf.download', ['id' => $data['appointment']->id]) }}"></a></p>
 
       <p>Regards, <br>
       System Administrator <br>
