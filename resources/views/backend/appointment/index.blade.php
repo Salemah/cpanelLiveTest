@@ -178,6 +178,9 @@
                                                     <th style="width: 10%">
                                                         Time
                                                     </th>
+                                                    <th style="width: 10%">
+                                                        Amount
+                                                    </th>
 
 
                                                     <th style="width: 15%" class="text-center">
@@ -231,6 +234,9 @@
                                                         </td>
                                                         <td>
                                                             {{ $appointment->booking_time }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $appointment->amount }}
                                                         </td>
                                                         <td>
                                                             @php

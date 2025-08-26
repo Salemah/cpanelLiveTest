@@ -8,6 +8,7 @@ use App\Mail\Appointmail;
 use App\Mail\DemoMail;
 use App\Mail\InvoiceMail;
 use App\Models\Appointment;
+use App\Models\BkashPaymentSubmit;
 use App\Models\CompanySetting;
 use App\Models\PaymentReceive;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -101,9 +102,9 @@ class AppointmentController extends Controller
 
         $datas["Setting"] = $Setting;
 
-        $pdf = Pdf::loadView('backend.appointment.invoicepdf',$datas);
+        $pdf = Pdf::loadView('backend.appointment.invoicepdf', $datas);
 
-         $dynamicSubject = $Setting->title . ' - Booking Invoice ' . $request->name;
+        $dynamicSubject = $Setting->title . ' - Booking Invoice ' . $request->name;
         Mail::to($request->email)->send(new InvoiceMail($data, $dynamicSubject, $pdf));
         //invoice mail end
 
@@ -123,7 +124,7 @@ class AppointmentController extends Controller
     {
         do {
             // Example: BK-20250824-ABCD1234
-            $bookingId = 'BK-'. random_int(10000000, 99999999);
+            $bookingId = 'BK-' . random_int(10000000, 99999999);
         } while (Appointment::where('booking_id', $bookingId)->exists()); // Check uniqueness
 
         return $bookingId;
@@ -135,8 +136,19 @@ class AppointmentController extends Controller
         //dd($appointments); // for debuggin'g only
         return view('backend.appointment.index', compact('appointments'));
     }
+    public function PaymentInstruction(Request $request)
+    {
+        $Setting = CompanySetting::first();
+        $appointment = Appointment::find($request->id);
+
+        //dd($appointments); // for debuggin'g only
+        return view('backend.appointment.payment_instruction', compact('appointment', 'Setting'));
+    }
+
+
     public function updateStatus(Request $request)
     {
+
         $request->validate([
             'appointment_id' => 'required|exists:appointments,id',
             'status' => 'required|string',
@@ -147,18 +159,19 @@ class AppointmentController extends Controller
         $appointment->save();
 
 
-        if($request->status == 'Confirmed'){
+        if ($request->status == 'Confirmed') {
 
 
             $paymentReceive = PaymentReceive::firstOrCreate(
                 ['appointment_id' => $appointment->id], // only check this field
                 [
                     'amount' => $appointment->amount,                 // values to set if creating
-                    'added_by' => $appointment->id,
+                    'added_by' => Auth::id(),
                     'user_id' => $appointment->user_id,
-                    'appointment_id' => Auth::id(),
+                    'appointment_id' => $appointment->id,
                     'payment_date' => Carbon::now(),
                     'team_id' => $appointment->team_id,
+                    'status' => $request->status,
 
                 ]
             );
@@ -168,6 +181,42 @@ class AppointmentController extends Controller
 
         return redirect()->back()->with('success', 'Appointment status updated successfully.');
     }
+    public function PaymentUpdateStatus(Request $request)
+    {
+
+        $request->validate([
+            'appointment_id' => 'required|exists:appointments,id',
+            'status' => 'required|string',
+        ]);
+
+        $appointment = Appointment::findOrFail($request->appointment_id);
+        $appointment->status = $request->status;
+        $appointment->save();
+
+
+        if ($request->status == 'Confirmed') {
+
+
+            $paymentReceive = PaymentReceive::updateOrCreate(
+                ['appointment_id' => $appointment->id], // only check this field
+                [
+                    'amount' => $appointment->amount,                 // values to set if creating
+                    'added_by' => Auth::id(),
+                    'user_id' => $appointment->user_id,
+                    'appointment_id' => $appointment->id,
+                    'payment_date' => Carbon::now(),
+                    'team_id' => $appointment->team_id,
+                    'status' => $request->status,
+
+                ]
+            );
+        }
+
+        event(new StatusUpdated($appointment));
+
+        return redirect()->back()->with('success', 'Appointment status updated successfully.');
+    }
+
     public function DashboardUpdateStatus(Request $request)
     {
         $request->validate([
@@ -200,5 +249,40 @@ class AppointmentController extends Controller
         $pdf = Pdf::loadView('backend.appointment.invoice', $data);
 
         return $pdf->download('appointments.pdf');
+    }
+    public function PaymentSubmit(Request $request)
+    {
+
+        // Validate inputs
+        $request->validate([
+            'appointment_id' => 'required|exists:appointments,id',
+            'amount' => 'required|numeric|min:1',
+            'payer_number' => 'required|string|min:11|max:15',
+            'trx_id' => 'required|string|max:50',
+        ]);
+        //dd($request->all());
+        $appointment = Appointment::findOrFail($request->appointment_id);
+        // Create new payment record
+        PaymentReceive::create([
+            'appointment_id' => $request->appointment_id,
+            'amount' => $request->amount,
+            'team_id' =>  $appointment->team_id,
+            'payment_date' => now(),
+            'number' => $request->payer_number,
+            'trx_id' => $request->trx_id,
+            'status' => 'Processing',
+        ]);
+
+        $appointment = Appointment::findOrFail($request->appointment_id);
+        $appointment->status = 'Processing';
+        $appointment->save();
+
+        event(new StatusUpdated($appointment));
+        // Return JSON success + redirect route
+        return response()->json([
+            'success'  => true,
+            'message'  => 'Payment submitted successfully.',
+            'redirect' => route('pdf.download', $request->appointment_id) // 👉 create this route
+        ]);
     }
 }

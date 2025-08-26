@@ -32,7 +32,61 @@
         </div>
 
     </div>
+   <form id="appointmentStatusForm" method="POST"
+                            action="{{ route('admin.payment.update.status') }}">
+                            @csrf
+                            <input type="hidden" name="appointment_id" id="modalAppointmentId">
 
+                            <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Appointment Details</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><strong>Client:</strong> <span id="modalAppointmentName">N/A</span></p>
+
+                                            <p><strong>Email:</strong> <span id="modalEmail">N/A</span></p>
+                                            <p><strong>Phone:</strong> <span id="modalPhone">N/A</span></p>
+                                            <p><strong>Staff:</strong> <span id="modalStaff">N/A</span></p>
+                                            <p><strong>Start:</strong> <span id="modalStartTime">N/A</span></p>
+                                            <p><strong>Amount:</strong> <span id="modalAmount">N/A</span></p>
+                                            <p><strong>Notes:</strong> <span id="modalNotes">N/A</span></p>
+                                            <p><strong>Current Status:</strong> <span id="modalStatusBadge">N/A</span>
+                                            </p>
+
+
+                                            <div class="form-group ">
+                                                <label><strong>Status:</strong></label>
+                                                <select name="status" class="form-control" id="modalStatusSelect">
+                                                    <option value="Pending payment">Pending payment</option>
+                                                    <option value="Processing">Processing</option>
+                                                    <option value="Confirmed">Confirmed</option>
+                                                    <option value="Cancelled">Cancelled</option>
+                                                    <option value="Completed">Completed</option>
+                                                    <option value="On Hold">On Hold</option>
+                                                    {{-- <option value="Rescheduled">Rescheduled</option> --}}
+                                                    <option value="No Show">No Show</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="submit"
+                                                onclick="return confirm('Are you sure you want to update booking status?')"
+                                                class="btn btn-danger">Update Status</button>
+
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
 @endsection
 
@@ -55,19 +109,34 @@
                         data: 'id',
                         name: 'id'
                     },
+
                     {
-                        title: 'Date',
+                        title: 'Booking Date',
                         data: 'date',
                         name: 'date'
                     },
-
+                    {
+                        title: 'Payment Date',
+                        data: 'payment_date',
+                        name: 'payment_date'
+                    },
+                    {
+                        title: 'Payer Number',
+                        data: 'payer_number',
+                        name: 'payer_number'
+                    },
+                    {
+                        title: 'Transaction ID',
+                        data: 'trx_id',
+                        name: 'trx_id'
+                    },
                      {
-                        title: 'Name',
+                        title: 'Customer Name',
                         data: 'name',
                         name: 'name'
                     },
                      {
-                        title: 'Team',
+                        title: 'Consultant',
                         data: 'team',
                         name: 'team'
                     },
@@ -76,6 +145,11 @@
                         title: 'amount',
                         data: 'amount',
                         name: 'amount'
+                    },
+                    {
+                        title: 'Status',
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         title: 'Action',
@@ -131,6 +205,42 @@
             });
 
 
+        });
+    </script>
+     <script>
+        $(document).on('click', '.view-appointment-btn', function() {
+
+            // Set modal fields
+            $('#modalAppointmentId').val($(this).data('id'));
+            $('#modalAppointmentName').text($(this).data('name'));
+
+            $('#modalEmail').text($(this).data('email'));
+            $('#modalPhone').text($(this).data('phone'));
+            $('#modalStaff').text($(this).data('employee'));
+            $('#modalStartTime').text($(this).data('start'));
+            $('#modalAmount').text($(this).data('amount'));
+            $('#modalNotes').text($(this).data('notes'));
+
+            // Set status select dropdown
+            var status = $(this).data('status');
+            $('#modalStatusSelect').val(status);
+
+            // Set status badge
+            var statusColors = {
+                'Pending payment': '#f39c12',
+                'Processing': '#3498db',
+                'Confirmed': '#2ecc71',
+                'Cancelled': '#ff0000',
+                'Completed': '#008000',
+                'On Hold': '#95a5a6',
+                'Rescheduled': '#f1c40f',
+                'No Show': '#e67e22',
+            };
+
+            var badgeColor = statusColors[status] || '#7f8c8d';
+            $('#modalStatusBadge').html(
+                `<span class="badge px-2 py-1" style="background-color: ${badgeColor}; color: white;">${status}</span>`
+            );
         });
     </script>
 @endsection

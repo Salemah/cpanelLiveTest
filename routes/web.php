@@ -69,6 +69,10 @@ Route::post('contact_us_message_insert', [ContactUsMessageController::class, 'Co
 Route::post('signin-process', [LoginController::class, 'SignInProcess'])->name('sign-in.process');
 Route::post('signUp-process', [LoginController::class, 'SignUpProcess'])->name('sign-Up.process');
 Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
+
+Route::get('/payment/{id?}', [AppointmentController::class, 'PaymentInstruction'])->name('payment.instruction');
+Route::post('/payment-submit', [AppointmentController::class, 'PaymentSubmit'])->name('appointments.payment.submit');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.dashboard');
@@ -97,6 +101,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments');
         Route::post('/appointments/update-status', [AppointmentController::class, 'updateStatus'])->name('appointments.update.status');
         Route::post('/update-status', [AppointmentController::class, 'DashboardUpdateStatus'])->name('dashboard.update.status');
+        Route::post('/payment-update-status', [AppointmentController::class, 'PaymentUpdateStatus'])->name('payment.update.status');
 
         Route::get('team/{id?}', [TeamController::class, 'TeamAccounts'])->name('account.team');
         Route::get('team_create', [TeamController::class, 'TeamCreate'])->name('account.team.create');

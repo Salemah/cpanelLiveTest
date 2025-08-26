@@ -159,7 +159,7 @@
             <img src="{{ asset('arc.jpg') }}" alt="Logo">
             <div>
                 @if ($data['appointment']->status != 'Confirmed')
-                <a href=""
+                <a href="{{route('payment.instruction',['id'=>$data['appointment']->id])}}"
                 style="
                 display: inline-block;
                 outline: 0;
