@@ -101,6 +101,6 @@ class HomeController extends Controller
     }
      public function UserDashboard(Request $request)
     {
-        return view('backend.user_dashboard');
+        return view('backend.user_panel');
     }
 }

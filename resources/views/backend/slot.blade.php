@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Slot List</li>
                                 </ol>
                             </nav>
@@ -250,8 +250,7 @@
                             <div class="col-md-6 my-2">
                                 <div class="row">
                                     <div class="col-10">
-                                        <input type="time" class="form-control"
-                                            name="from_time" id="editday_time" />
+                                        <input type="time" class="form-control" name="from_time" id="editday_time" />
                                     </div>
                                 </div>
                             </div>
@@ -375,7 +374,7 @@
                     '</div>' +
                     '</div>');
             });
-             $(document).on('click', '.tableDelete', function() {
+            $(document).on('click', '.tableDelete', function() {
 
                 swal.fire({
                     title: "Are you sure?",

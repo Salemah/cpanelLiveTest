@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">ContactUs List</li>
                                 </ol>
                             </nav>
@@ -237,8 +237,8 @@
                         $('input[name^="office"]').val(responseText.data.office);
                         $('input[name^="phone"]').val(responseText.data.phone);
                         $('input[name^="email"]').val(responseText.data.email);
-                         $('textarea[name^="address"]').val(responseText.data.address);
-///tinymce.get('address').setContent(responseText.data.address);
+                        $('textarea[name^="address"]').val(responseText.data.address);
+                        ///tinymce.get('address').setContent(responseText.data.address);
                         const baseUrl = "{{ asset('/') }}";
                         $('select[name^="status"]').val(responseText.data.status);
                         let imageName = responseText.data.image;

@@ -9,13 +9,14 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">Contact</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Payment Receive</li>
                                 </ol>
                             </nav>
 
-                            <a type="button" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;" href="{{ route('admin.account.team.create') }}">+ Add New Team</a>
+                            <a type="button" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"
+                                href="{{ route('admin.account.team.create') }}">+ Add New Team</a>
 
                         </div>
 
@@ -32,62 +33,56 @@
         </div>
 
     </div>
-   <form id="appointmentStatusForm" method="POST"
-                            action="{{ route('admin.payment.update.status') }}">
-                            @csrf
-                            <input type="hidden" name="appointment_id" id="modalAppointmentId">
+    <form id="appointmentStatusForm" method="POST" action="{{ route('admin.payment.update.status') }}">
+        @csrf
+        <input type="hidden" name="appointment_id" id="modalAppointmentId">
 
-                            <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Appointment Details</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p><strong>Client:</strong> <span id="modalAppointmentName">N/A</span></p>
+        <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Appointment Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Client:</strong> <span id="modalAppointmentName">N/A</span></p>
 
-                                            <p><strong>Email:</strong> <span id="modalEmail">N/A</span></p>
-                                            <p><strong>Phone:</strong> <span id="modalPhone">N/A</span></p>
-                                            <p><strong>Staff:</strong> <span id="modalStaff">N/A</span></p>
-                                            <p><strong>Start:</strong> <span id="modalStartTime">N/A</span></p>
-                                            <p><strong>Amount:</strong> <span id="modalAmount">N/A</span></p>
-                                            <p><strong>Notes:</strong> <span id="modalNotes">N/A</span></p>
-                                            <p><strong>Current Status:</strong> <span id="modalStatusBadge">N/A</span>
-                                            </p>
+                        <p><strong>Email:</strong> <span id="modalEmail">N/A</span></p>
+                        <p><strong>Phone:</strong> <span id="modalPhone">N/A</span></p>
+                        <p><strong>Staff:</strong> <span id="modalStaff">N/A</span></p>
+                        <p><strong>Start:</strong> <span id="modalStartTime">N/A</span></p>
+                        <p><strong>Amount:</strong> <span id="modalAmount">N/A</span></p>
+                        <p><strong>Notes:</strong> <span id="modalNotes">N/A</span></p>
+                        <p><strong>Current Status:</strong> <span id="modalStatusBadge">N/A</span>
+                        </p>
 
 
-                                            <div class="form-group ">
-                                                <label><strong>Status:</strong></label>
-                                                <select name="status" class="form-control" id="modalStatusSelect">
-                                                    <option value="Pending payment">Pending payment</option>
-                                                    <option value="Processing">Processing</option>
-                                                    <option value="Confirmed">Confirmed</option>
-                                                    <option value="Cancelled">Cancelled</option>
-                                                    <option value="Completed">Completed</option>
-                                                    <option value="On Hold">On Hold</option>
-                                                    {{-- <option value="Rescheduled">Rescheduled</option> --}}
-                                                    <option value="No Show">No Show</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                        <div class="form-group ">
+                            <label><strong>Status:</strong></label>
+                            <select name="status" class="form-control" id="modalStatusSelect">
+                                <option value="Pending payment">Pending payment</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Completed">Completed</option>
+                                <option value="On Hold">On Hold</option>
+                                {{-- <option value="Rescheduled">Rescheduled</option> --}}
+                                <option value="No Show">No Show</option>
+                            </select>
+                        </div>
+                    </div>
 
-                                        <div class="modal-footer">
-                                            <button type="submit"
-                                                onclick="return confirm('Are you sure you want to update booking status?')"
-                                                class="btn btn-danger">Update Status</button>
+                    <div class="modal-footer">
+                        <button type="submit" onclick="return confirm('Are you sure you want to update booking status?')"
+                            class="btn btn-danger">Update Status</button>
 
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 @endsection
 
 @section('script')
@@ -130,12 +125,12 @@
                         data: 'trx_id',
                         name: 'trx_id'
                     },
-                     {
+                    {
                         title: 'Customer Name',
                         data: 'name',
                         name: 'name'
                     },
-                     {
+                    {
                         title: 'Consultant',
                         data: 'team',
                         name: 'team'
@@ -207,7 +202,7 @@
 
         });
     </script>
-     <script>
+    <script>
         $(document).on('click', '.view-appointment-btn', function() {
 
             // Set modal fields

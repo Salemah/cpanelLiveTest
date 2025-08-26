@@ -1,4 +1,4 @@
-@extends('backend.layouts.backendapp')
+@extends('backend.user_layouts.backendapp')
 
 @section('content')
     <div class="">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                         <div class="">
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">

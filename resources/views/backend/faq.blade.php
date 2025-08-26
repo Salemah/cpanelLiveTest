@@ -9,13 +9,13 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Faq List</li>
                                 </ol>
                             </nav>
                             {{-- <a href="{{ route('account.sale_list') }}" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"><i class="fa fa-angle-double-left"></i> {{ __('messages.Sale List') }}</a> --}}
-                            <button class="btn btn-primary btn-sm FaqAddButton"
-                                style="float: right;margin-top:-20px;"><i class="fa fa-plus"></i>Faq Add</button>
+                            <button class="btn btn-primary btn-sm FaqAddButton" style="float: right;margin-top:-20px;"><i
+                                    class="fa fa-plus"></i>Faq Add</button>
                         </div>
 
                         <div class="card-block container">
@@ -34,8 +34,8 @@
 
     <div class="modal fade" id="FaqAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
-            <form id="Faq_insert_update" action="{{ route('admin.account.faq.insert') }}"
-                accept-charset="utf-6" enctype="multipart/form-data" method="post" class="form-horizontal validatable">
+            <form id="Faq_insert_update" action="{{ route('admin.account.faq.insert') }}" accept-charset="utf-6"
+                enctype="multipart/form-data" method="post" class="form-horizontal validatable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Faq Add</h1>
@@ -48,13 +48,13 @@
                                 <label for="recipient-name" class="col-form-label">Question:</label>
                                 <input type="text" name="question" id="question" class="form-control">
                             </div>
-                             <div class="col-6 mb-6">
+                            <div class="col-6 mb-6">
                                 <label for="recipient-name" class="col-form-label">Answer:</label>
                                 <textarea name="answer" class="form-control ckeditor" id="answer" cols="30" rows="5"></textarea>
                             </div>
-                                <div class="form-group col-6 mb-3">
+                            <div class="form-group col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Faq Category:</label>
-                                <select name="faq_category" id="faq_category" class="form-control" >
+                                <select name="faq_category" id="faq_category" class="form-control">
 
 
                                 </select>
@@ -217,7 +217,7 @@
                         $('select[name^="status"]').val(responseText.data.status);
                         if (responseText.data.answer) {
                             tinymce.get('answer').setContent(responseText.data
-                            .answer);
+                                .answer);
                         }
 
                         $("#FaqAdd").modal('show');

@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Article List</li>
                                 </ol>
                             </nav>
@@ -276,11 +276,11 @@
 
                         if (responseText.data.second_description) {
                             tinymce.get('second_description').setContent(responseText.data
-                            .second_description);
+                                .second_description);
                         }
                         if (responseText.data.description) {
                             tinymce.get('description').setContent(responseText.data
-                            .description);
+                                .description);
                         }
                         if (responseText.data.about_us) {
                             tinymce.get('about_us').setContent(responseText.data.about_us);

@@ -22,7 +22,7 @@
      <ul class="menu-inner py-1">
          <!-- Dashboards -->
          <li class="menu-item active">
-             <a href="{{ route('user.dashboard') }}" class="menu-link">
+             <a href="{{ route('user.panel') }}" class="menu-link">
                  <i class="menu-icon tf-icons ti ti-smart-home"></i>
                  <div data-i18n="Dashboards">Dashboards</div>
                  {{-- <div class="badge bg-danger rounded-pill ms-auto">5</div> --}}
@@ -31,15 +31,11 @@
          </li>
          <li class="menu-item">
              <a href="{{ route('user.appointment') }}" class="menu-link">
-                 <i class="menu-icon tf-icons ti ti-mail"></i>
+                 <i class="fa-solid fa-calendar-days me-3"></i>
                  <div data-i18n="Appointment">Appointment</div>
              </a>
          </li>
-         <li class="menu-item">
-             <a href="{{ route('admin.account.law_category') }}" class="menu-link">
-                 <div data-i18n="Law Category">Law Category</div>
-             </a>
-         </li>
+        
 
 
      </ul>

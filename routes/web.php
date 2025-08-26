@@ -72,10 +72,13 @@ Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])
 
 Route::get('/payment/{id?}', [AppointmentController::class, 'PaymentInstruction'])->name('payment.instruction');
 Route::post('/payment-submit', [AppointmentController::class, 'PaymentSubmit'])->name('appointments.payment.submit');
+Route::get('/unauthorized', function () {
+    return view('errors.unauthorized');
+})->name('error.unauthorized');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.dashboard');
+    Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.panel');
     Route::post('profile_update', [ProfileController::class, 'UserProfileUpdate'])->name('account.profile.update');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -90,8 +93,9 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::get('/dashboard', [HomeController::class, 'Dashboard'])->name('dashboard');
-    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {
+        Route::get('/dashboard', [HomeController::class, 'Dashboard'])->name('dashboard');
         Route::get('company-setting', [CompanySettingController::class, 'index'])->name('company.setting');
         Route::post('company-setting-insert', [CompanySettingController::class, 'companySettingInsert'])->name('company.setting.insert');
 

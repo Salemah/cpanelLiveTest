@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">All Apointments</li>
                                 </ol>
                             </nav>
@@ -132,13 +132,11 @@
                         </form>
                         <div class="">
                             @if (session('success'))
-
-                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>{{ session('success') }}</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{ session('success') }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
                             @endif
                             <!-- Content Header (Page header) -->
                             <!-- Content Header (Page header) -->
@@ -262,9 +260,9 @@
                                                                 data-notes="{{ $appointment->notes }}"
                                                                 data-status="{{ $appointment->status }}">View</button>
 
-                                                            <a href="{{ route('pdf.download',['id' => $appointment->id]) }}"
+                                                            <a href="{{ route('pdf.download', ['id' => $appointment->id]) }}"
                                                                 class="btn btn-info btn-sm py-0 px-1">Invoice</a>
-                                                            </td>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

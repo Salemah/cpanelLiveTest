@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item dropdown-toggle" data-bs-toggle="dropdown"
                                         aria-expanded="false">
                                         Settings</li>
@@ -19,9 +19,8 @@
                                 </ol>
                             </nav>
                             <a href="{{ url('/accounts/user_role_list') }}"><button
-                                            class="btn btn-primary btn-sm UserAddButton"
-                                            style="float: right;margin-top:-20px;"><i
-                                                class="fa fa-angle-double-left"></i>User Role List</button></a>
+                                    class="btn btn-primary btn-sm UserAddButton" style="float: right;margin-top:-20px;"><i
+                                        class="fa fa-angle-double-left"></i>User Role List</button></a>
                         </div>
                         {{-- <div class="card-header">
                                     <h5 class="card-title">User Permission List</h5>
@@ -32,13 +31,11 @@
                                 {{ csrf_field() }}
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-search-input"
-                                            class="col-12 col-form-label">Role Name</label>
+                                        <label for="example-search-input" class="col-12 col-form-label">Role Name</label>
                                         <div class="col-12">
                                             <input type="text" name="role"
                                                 value="@if ($role) {{ $role->name }} @endif"
-                                                class="form-control" placeholder="Role Name"
-                                                value="" required>
+                                                class="form-control" placeholder="Role Name" value="" required>
                                         </div>
                                     </div>
                                 </div>

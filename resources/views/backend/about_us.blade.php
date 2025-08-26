@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">AboutUs List</li>
                                 </ol>
                             </nav>
@@ -86,7 +86,8 @@
 
                             </div>
                             <div class="form-group col-2">
-                                <img src="" id="image_two_edit" style="width: 40px; height:auto;" alt="">
+                                <img src="" id="image_two_edit" style="width: 40px; height:auto;"
+                                    alt="">
                             </div>
                             <div class="form-group col-6 col-sm-6 col-md-6 mb-2">
                                 <label for="favicon">Status<span class="text-danger">*</span></label>

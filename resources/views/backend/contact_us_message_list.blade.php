@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Contact Us Message List</li>
                                 </ol>
                             </nav>
@@ -71,7 +71,7 @@
                                 <label for="recipient-name" class="col-form-label">Message:</label>
                                 <textarea name="message" id="message" cols="30" rows="2" class="form-control"></textarea>
                             </div>
-                              <div class="form-group col-6 col-sm-6 col-md-6 mb-2">
+                            <div class="form-group col-6 col-sm-6 col-md-6 mb-2">
                                 <label for="favicon">Status<span class="text-danger">*</span></label>
                                 <select name="status" id="status" class="form-control">
                                     <option value="">Select Status</option>

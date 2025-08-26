@@ -27,4 +27,18 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    public function render($request, Throwable $e)
+    {
+        // ✅ Catch Spatie UnauthorizedException and redirect
+        if ($e instanceof UnauthorizedException) {
+            return redirect()->route('error.unauthorized');
+        }
+
+        // ✅ Catch generic 403 (Forbidden) errors
+        if ($this->isHttpException($e) && $e->getStatusCode() === 403) {
+            return redirect()->route('error.unauthorized');
+        }
+
+        return parent::render($request, $e);
+    }
 }

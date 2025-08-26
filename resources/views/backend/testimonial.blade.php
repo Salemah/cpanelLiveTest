@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Testimonial List</li>
                                 </ol>
                             </nav>
@@ -217,7 +217,7 @@
                         $('input[name^="title"]').val(responseText.data.title);
                         $('input[name^="quote_by"]').val(responseText.data.quote_by);
 
-                      tinymce.get('description').setContent(responseText.data.description);
+                        tinymce.get('description').setContent(responseText.data.description);
                         $('select[name^="status"]').val(responseText.data.status);
 
                         $("#TestimonialAdd").modal('show');

@@ -9,13 +9,14 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">Contact</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Team List</li>
                                 </ol>
                             </nav>
                             {{-- <a href="{{ route('account.sale_list') }}" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"><i class="fa fa-angle-double-left"></i> {{ __('messages.Sale List') }}</a> --}}
-                            <a type="button" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;" href="{{ route('admin.account.team.create') }}">+ Add New Team</a>
+                            <a type="button" class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"
+                                href="{{ route('admin.account.team.create') }}">+ Add New Team</a>
                             {{-- <button class="btn btn-primary btn-sm TeamAddButton" style="float: right;margin-top:-20px;"><i
                                     class="fa fa-plus"></i>Team</button> --}}
                         </div>
@@ -33,8 +34,6 @@
         </div>
 
     </div>
-
-    
 @endsection
 
 @section('script')

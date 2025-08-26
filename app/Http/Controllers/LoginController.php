@@ -27,11 +27,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->hasAnyRole('admin')) {
-                return redirect(route('dashboard'));
+                return redirect(route('admin.dashboard'));
             } elseif (Auth::User()->hasAnyRole('team')) {
-                return redirect(route('dashboard'));
+                return redirect(route('admin.dashboard'));
             } elseif (Auth::User()->hasanyrole('user')) {
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.panel');
             } else {
                 // return redirect(route('my-accounts'));
             }

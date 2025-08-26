@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Legal Area List</li>
                                 </ol>
                             </nav>
@@ -256,7 +256,8 @@
                         tinymce.get('description').setContent(responseText.data.description);
                         const baseUrl = "{{ asset('/') }}";
                         $('select[name^="status"]').val(responseText.data.status);
-                        $('select[name^="law_category_id"]').val(responseText.data.law_category_id);
+                        $('select[name^="law_category_id"]').val(responseText.data
+                            .law_category_id);
                         let imageName = responseText.data.image;
                         let imageUrl = baseUrl + imageName;
                         let drEvent = $('#image').dropify();

@@ -9,13 +9,14 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">Contact</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Team List</li>
                                 </ol>
                             </nav>
 
-                           <a   class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;" href="{{ route('admin.account.team') }}"> Team List</a>
+                            <a class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"
+                                href="{{ route('admin.account.team') }}"> Team List</a>
                         </div>
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -36,7 +37,8 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('admin.account.team.insert') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.account.team.insert') }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="card-block container">
                                 <div class="row">
@@ -96,8 +98,9 @@
                                                 class="text-danger">( Size: 500*500)</span></label>
                                         {{-- <input type="file" id="image" data-height="290"
                                             class="dropify form-control " name="image"> --}}
-                                            {{-- <small class="text-red">Note: size: Width-1280px Height: 720px</small> --}}
-                                        <input class="form-control" name="image" accept="image/*" type="file" id="imgInp">
+                                        {{-- <small class="text-red">Note: size: Width-1280px Height: 720px</small> --}}
+                                        <input class="form-control" name="image" accept="image/*" type="file"
+                                            id="imgInp">
                                         <img style="width: 150px; margin-top:10px; border:1px solid black;" id="blah"
                                             src="{{ asset('uploads/images/no-image.jpg') }}" alt="your image">
 
@@ -168,7 +171,8 @@
                                                 @endphp
                                                 <select class="form-control @error('step') is-invalid @enderror"
                                                     name="break_duration" id="break_duration">
-                                                    <option value="" {{ !$selectedBreak ? 'selected' : '' }}>No Break
+                                                    <option value="" {{ !$selectedBreak ? 'selected' : '' }}>No
+                                                        Break
                                                     </option>
                                                     @foreach ($breaks as $breakValue)
                                                         <option {{ $selectedBreak == $breakValue ? 'selected' : '' }}
@@ -375,12 +379,12 @@
         });
     </script>
     {{-- show image --}}
-<script>
-    imgInp.onchange = evt => {
-        const [file] = imgInp.files
-        if (file) {
-            blah.src = URL.createObjectURL(file)
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
         }
-    }
-</script>
+    </script>
 @endsection

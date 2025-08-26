@@ -22,7 +22,7 @@
      <ul class="menu-inner py-1">
          <!-- Dashboards -->
          <li class="menu-item active">
-             <a href="{{ route('dashboard') }}" class="menu-link">
+             <a href="{{ route('admin.dashboard') }}" class="menu-link">
                  <i class="menu-icon tf-icons ti ti-smart-home"></i>
                  <div data-i18n="Dashboards">Dashboards</div>
                  {{-- <div class="badge bg-danger rounded-pill ms-auto">5</div> --}}

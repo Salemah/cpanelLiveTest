@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Banner List</li>
                                 </ol>
                             </nav>
@@ -66,7 +66,8 @@
                             </div>
 
                             <div class="form-group col-4 mb-2">
-                                <label for="favicon">Upload Image<span class="text-danger">*</span> <span class="text-danger">( Size: 600*600)</span></label>
+                                <label for="favicon">Upload Image<span class="text-danger">*</span> <span
+                                        class="text-danger">( Size: 600*600)</span></label>
                                 <input type="file" id="image" data-height="290" class="dropify form-control "
                                     name="image">
 

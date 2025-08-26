@@ -9,7 +9,7 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Reputation List</li>
                                 </ol>
                             </nav>
@@ -244,8 +244,8 @@
                         $('input[name^="title"]').val(responseText.data.title);
                         $('input[name^="name"]').val(responseText.data.name);
                         $('input[name^="icon"]').val(responseText.data.icon);
-                      tinymce.get('description').setContent(responseText.data.description);
-                      tinymce.get('law_details').setContent(responseText.data.law_details);
+                        tinymce.get('description').setContent(responseText.data.description);
+                        tinymce.get('law_details').setContent(responseText.data.law_details);
                         // $('textarea[name^="law_details"]').val(responseText.data.law_details);
                         $('select[name^="status"]').val(responseText.data.status);
                         var newOption = new Option(responseText.legal_area_name,

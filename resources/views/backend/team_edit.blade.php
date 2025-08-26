@@ -9,12 +9,13 @@
                         <div class="card-header align-items-center justify-content-between d-flex">
                             <nav aria-label="breadcrumb" style="margin-top:-10px;">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">Contact</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Team </li>
                                 </ol>
                             </nav>
-                            <a   class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;" href="{{ route('admin.account.team') }}"> Team List</a>
+                            <a class="btn btn-primary btn-sm" style="float: right;margin-top:-20px;"
+                                href="{{ route('admin.account.team') }}"> Team List</a>
 
                             {{-- <button class="btn btn-primary btn-sm TeamAddButton" style="float: right;margin-top:-20px;"><i
                                     class="fa fa-plus"></i>Team</button> --}}
@@ -38,12 +39,13 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('admin.account.team.update',$user->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.account.team.update', $user->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="card-block container">
                                 <div class="row">
-                                    <input type="hidden" name="user_id" value="{{$user->id}}" id="hidden-id" />
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}" id="hidden-id" />
                                     <div class="col-6 mb-3">
                                         <label for="recipient-name" class="col-form-label">Name:</label>
                                         <input type="text" name="name" id="name"
@@ -307,105 +309,101 @@
                                 </div>
                                 <hr>
 
-                                    <div class="row d-flex">
-                                        <div class="col-md-10">
-                                            <h2 class="mb-0">Add Holidays</h2>
-                                            <p class="text-muted">
-                                                No need to add time for a full day; for part-time work, specify the day and
-                                                time.
-                                            </p>
-                                            <span id="addHoliday" class="btn btn-primary mb-2 btn-sm">
-                                                <i class="fa fa-plus"></i> Add Holiday
-                                            </span>
-                                            <div class="holidayContainer">
+                                <div class="row d-flex">
+                                    <div class="col-md-10">
+                                        <h2 class="mb-0">Add Holidays</h2>
+                                        <p class="text-muted">
+                                            No need to add time for a full day; for part-time work, specify the day and
+                                            time.
+                                        </p>
+                                        <span id="addHoliday" class="btn btn-primary mb-2 btn-sm">
+                                            <i class="fa fa-plus"></i> Add Holiday
+                                        </span>
+                                        <div class="holidayContainer">
+                                            @php
+                                                // Get holidays from old input or database
+                                                $holidaysInput = old('holidays.date', []);
+                                                $dbHolidays = $user->employee->holidays ?? [];
+                                                $holidaysToDisplay = !empty($holidaysInput)
+                                                    ? $holidaysInput
+                                                    : $dbHolidays;
+                                            @endphp
+
+                                            @forelse($holidaysToDisplay as $index => $holidayItem)
                                                 @php
-                                                    // Get holidays from old input or database
-                                                    $holidaysInput = old('holidays.date', []);
-                                                    $dbHolidays = $user->employee->holidays ?? [];
-                                                    $holidaysToDisplay = !empty($holidaysInput)
-                                                        ? $holidaysInput
-                                                        : $dbHolidays;
-                                                @endphp
+                                                    // Determine if we're using old input or database data
+$usingOldInput = !empty($holidaysInput);
 
-                                                @forelse($holidaysToDisplay as $index => $holidayItem)
-                                                    @php
-                                                        // Determine if we're using old input or database data
-                                                        $usingOldInput = !empty($holidaysInput);
-
-                                                        if ($usingOldInput) {
-                                                            $date = old("holidays.date.$index");
-                                                            $holiday = null;
-                                                        } else {
-                                                            $holiday = $holidayItem;
-                                                            $date = $holiday->date;
-                                                            // Format date for input field if it's not already in YYYY-MM-DD format
-                                                                                                                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
-                                                                try {
-                                                                    $date = \Carbon\Carbon::parse($date)->format(
-                                                                        'Y-m-d',
-                                                                    );
-                                                                } catch (Exception $e) {
-                                                                    $date = '';
-                                                                }
+if ($usingOldInput) {
+    $date = old("holidays.date.$index");
+    $holiday = null;
+} else {
+    $holiday = $holidayItem;
+    $date = $holiday->date;
+    // Format date for input field if it's not already in YYYY-MM-DD format
+                                                        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+                                                            try {
+                                                                $date = \Carbon\Carbon::parse($date)->format('Y-m-d');
+                                                            } catch (Exception $e) {
+                                                                $date = '';
                                                             }
                                                         }
+                                                    }
 
-                                                        $fromTime = old(
-                                                            "holidays.from_time.$index",
-                                                            $holiday && $holiday->hours
-                                                                ? explode('-', $holiday->hours[0])[0] ?? ''
-                                                                : '',
-                                                        );
-                                                        $toTime = old(
-                                                            "holidays.to_time.$index",
-                                                            $holiday && $holiday->hours
-                                                                ? explode('-', $holiday->hours[0])[1] ?? ''
-                                                                : '',
-                                                        );
-                                                        $recurring = old(
-                                                            "holidays.recurring.$index",
-                                                            $holiday->recurring ?? 0,
-                                                        );
-                                                    @endphp
-                                                    <div class="row holiday-row">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="mb-0">Date</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="holidays[date][]" value="{{ $date }}"
-                                                                    required>
-                                                            </div>
+                                                    $fromTime = old(
+                                                        "holidays.from_time.$index",
+                                                        $holiday && $holiday->hours
+                                                            ? explode('-', $holiday->hours[0])[0] ?? ''
+                                                            : '',
+                                                    );
+                                                    $toTime = old(
+                                                        "holidays.to_time.$index",
+                                                        $holiday && $holiday->hours
+                                                            ? explode('-', $holiday->hours[0])[1] ?? ''
+                                                            : '',
+                                                    );
+                                                    $recurring = old(
+                                                        "holidays.recurring.$index",
+                                                        $holiday->recurring ?? 0,
+                                                    );
+                                                @endphp
+                                                <div class="row holiday-row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="mb-0">Date</label>
+                                                            <input class="form-control" type="date"
+                                                                name="holidays[date][]" value="{{ $date }}"
+                                                                required>
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <strong>From:</strong>
-                                                                <input type="time" class="form-control from"
-                                                                    name="holidays[from_time][]"
-                                                                    value="{{ $fromTime }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <strong>To:</strong>
-                                                                <input type="time" class="form-control to"
-                                                                    name="holidays[to_time][]"
-                                                                    value="{{ $toTime }}">
-                                                                <div class="text-right text-danger removeHoliday"
-                                                                    style="cursor:pointer;">
-                                                                    Remove
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <input type="hidden" name="holidays[recurring][]"
-                                                            value="{{ $recurring }}">
                                                     </div>
-                                                @empty
-                                                    <p>No holidays found for this user. Click "Add Holiday" to create one.
-                                                    </p>
-                                                @endforelse
-                                            </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <strong>From:</strong>
+                                                            <input type="time" class="form-control from"
+                                                                name="holidays[from_time][]" value="{{ $fromTime }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <strong>To:</strong>
+                                                            <input type="time" class="form-control to"
+                                                                name="holidays[to_time][]" value="{{ $toTime }}">
+                                                            <div class="text-right text-danger removeHoliday"
+                                                                style="cursor:pointer;">
+                                                                Remove
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="holidays[recurring][]"
+                                                        value="{{ $recurring }}">
+                                                </div>
+                                            @empty
+                                                <p>No holidays found for this user. Click "Add Holiday" to create one.
+                                                </p>
+                                            @endforelse
                                         </div>
                                     </div>
+                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 pt-3 pl-md-3 my-5 text-center">
                                     <button type="submit" class="btn btn-primary">Update Team</button>
                                 </div>
@@ -509,16 +507,16 @@
             });
         });
     </script>
-     {{-- show image --}}
-<script>
-    imgInp.onchange = evt => {
-        const [file] = imgInp.files
-        if (file) {
-            blah.src = URL.createObjectURL(file)
+    {{-- show image --}}
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
         }
-    }
-</script>
- <script>
+    </script>
+    <script>
         $(document).ready(function() {
             // Add new holiday row
             $('#addHoliday').click(function() {
