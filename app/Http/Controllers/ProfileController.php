@@ -26,6 +26,12 @@ class ProfileController extends Controller
             'users_details' => $request->user(),
         ]);
     }
+    public function UserProfileedit(Request $request): View
+    {
+        return view('backend.user.profile.edit', [
+            'users_details' => $request->user(),
+        ]);
+    }
 
     /**
      * Update the user's profile information.
@@ -110,6 +116,56 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('profile.edit')->with('message', 'Updated Successfully!');
+    }
+    public function ProfileUpdate(Request $request)
+    {
+        $uploded_img = null;
+        $user = Auth::User();
+        $request->validate(array(
+            'email' =>  'required',
+            'name'  =>  'required',
+        ));
+
+
+
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $old_img = public_path('/image/User' . $request->image);
+            if (file_exists($old_img)) {
+                @unlink($old_img);
+            }
+            $filenamefavicon = time() . $file->getClientOriginalName();
+            $file->move(public_path('/image/User'),  $filenamefavicon);
+
+            $uploded_img = 'image/User/' . $filenamefavicon;
+        }
+
+        if (!$request->file('image')) {
+            $uploded_img =  Auth::User()->image;
+        }
+
+
+
+        DB::table('users')
+            ->where('id', Auth::id())
+            ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+
+                'phone' => $request->mobile,
+
+                'image' => $uploded_img,
+                'address' => $request->address,
+
+            ]);
+        $team = Team::where('user_id', Auth::id())->first();
+        if ($team) {
+            $team->phone = $request->name;
+            $team->name = $request->name;
+            $team->save();
+        }
+
+        return redirect()->route('user.profile.edit')->with('message', 'Updated Successfully!');
     }
     /**
      * Delete the user's account.

@@ -9,37 +9,39 @@
                     <div class="swiper-slide">
                         <div class="row">
                             <div class="col-12">
-                                <h5 class="text-white mb-0">Txocccday Appointment</h5>
-                                <small>Total 28.5% Conversion Rate</small>
+                                <h5 class="text-white mb-0">Today Appointment</h5>
+                                <small>Booking Time: @if ($appointmenttoday)
+                                        {{ $appointmenttoday->booking_time }}
+                                    @endif
+                                </small>
+                                <br>
+                                <small>Booking Date: @if ($appointmenttoday)
+                                        {{ $appointmenttoday->booking_date }}
+                                    @endif
+                                </small>
                             </div>
                             <div class="row">
                                 <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1 pt-md-9">
-                                    <h6 class="text-white mt-0 mt-md-3 mb-4">Traffic</h6>
+                                    <h6 class="text-white mt-0 mt-md-3 mb-4">Consultant: @if ($appointmenttoday)
+                                            {{ $appointmenttoday->employee->name }}
+                                        @endif
+                                    </h6>
                                     <div class="row">
                                         <div class="col-6">
                                             <ul class="list-unstyled mb-0">
                                                 <li class="d-flex mb-4 align-items-center">
-                                                    <p class="mb-0 fw-medium me-2 website-analytics-text-bg">28%</p>
-                                                    <p class="mb-0">Sessions</p>
+                                                    <p class="mb-0  me-3">Payment Status: </p> <span
+                                                        class="badge text-bg-danger">
+                                                        @if ($appointmenttoday)
+                                                            {{ $appointmenttoday->status }}
+                                                        @endif
+                                                    </span>
+                                                    {{-- <p class="mb-0 bg-danger p-1" >@if ($appointment){{$appointment->status}}@endif</p> --}}
                                                 </li>
-                                                <li class="d-flex align-items-center">
-                                                    <p class="mb-0 fw-medium me-2 website-analytics-text-bg">1.2k</p>
-                                                    <p class="mb-0">Leads</p>
-                                                </li>
+
                                             </ul>
                                         </div>
-                                        <div class="col-6">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="d-flex mb-4 align-items-center">
-                                                    <p class="mb-0 fw-medium me-2 website-analytics-text-bg">3.1k</p>
-                                                    <p class="mb-0">Page Views</p>
-                                                </li>
-                                                <li class="d-flex align-items-center">
-                                                    <p class="mb-0 fw-medium me-2 website-analytics-text-bg">12%</p>
-                                                    <p class="mb-0">Conversions</p>
-                                                </li>
-                                            </ul>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
@@ -52,82 +54,45 @@
                     <div class="swiper-slide">
                         <div class="row">
                             <div class="col-12">
-                                <h5 class="text-white mb-0">Up Coming Appointment</h5>
-                                <small>Total 28.5% Conversion Rate</small>
+                                <h5 class="text-white mb-0">Today Appointment</h5>
+                                <small>Booking Time: @if ($appointmentUpComing)
+                                        {{ $appointmentUpComing->booking_time }}
+                                    @endif
+                                </small>
+                                <br>
+                                <small>Booking Date: @if ($appointmentUpComing)
+                                        {{ $appointmentUpComing->booking_date }}
+                                    @endif
+                                </small>
                             </div>
-                            <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1 pt-md-9">
-                                <h6 class="text-white mt-0 mt-md-3 mb-4">Spending</h6>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">12h</p>
-                                                <p class="mb-0">Spend</p>
-                                            </li>
-                                            <li class="d-flex align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">127</p>
-                                                <p class="mb-0">Order</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">18</p>
-                                                <p class="mb-0">Order Size</p>
-                                            </li>
-                                            <li class="d-flex align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">2.3k</p>
-                                                <p class="mb-0">Items</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="../../assets/img/illustrations/card-website-analytics-2.png"
-                                    alt="Website Analytics" height="150" class="card-website-analytics-img">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide bg-danger">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="text-white mb-0">Cancel Appointment</h5>
-                                <small>Total 28.5% Conversion Rate</small>
-                            </div>
-                            <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1 pt-md-9">
-                                <h6 class="text-white mt-0 mt-md-3 mb-4">Revenue Sources</h6>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">268</p>
-                                                <p class="mb-0">Direct</p>
-                                            </li>
-                                            <li class="d-flex align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">62</p>
-                                                <p class="mb-0">Referral</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">890</p>
-                                                <p class="mb-0">Organic</p>
-                                            </li>
-                                            <li class="d-flex align-items-center">
-                                                <p class="mb-0 fw-medium me-2 website-analytics-text-bg">1.2k</p>
-                                                <p class="mb-0">Campaign</p>
-                                            </li>
-                                        </ul>
+                            <div class="row">
+                                <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1 pt-md-9">
+                                    <h6 class="text-white mt-0 mt-md-3 mb-4">Consultant: @if ($appointmentUpComing)
+                                            {{ $appointmentUpComing->employee->name }}
+                                        @endif
+                                    </h6>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="d-flex mb-4 align-items-center">
+                                                    <p class="mb-0  me-3">Payment Status: </p> <span
+                                                        class="badge text-bg-danger">
+                                                        @if ($appointmentUpComing)
+                                                            {{ $appointmentUpComing->status }}
+                                                        @endif
+                                                    </span>
+                                                    {{-- <p class="mb-0 bg-danger p-1" >@if ($appointment){{$appointment->status}}@endif</p> --}}
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="../../assets/img/illustrations/card-website-analytics-3.png"
-                                    alt="Website Analytics" height="150" class="card-website-analytics-img">
+                                <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
+                                    <img src="../../assets/img/illustrations/card-website-analytics-1.png"
+                                        alt="Website Analytics" height="150" class="card-website-analytics-img">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,13 +101,47 @@
             </div>
         </div>
         <!--/ Website Analytics -->
+        <div class="col-xl-12 col-sm-12">
+            <div class="card-block container">
+                <div class="table-responsive" id="tab">
+                    <table class="table table-striped table-bordered table-hover"
+                        style="border: solid 1px rgba(255, 193, 193, 0.1);" id="team_table">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Appointment Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Client:</strong> <span id="modalAppointmentName">N/A</span></p>
 
+                        <p><strong>Email:</strong> <span id="modalEmail">N/A</span></p>
+                        <p><strong>Phone:</strong> <span id="modalPhone">N/A</span></p>
+                        <p><strong>Staff:</strong> <span id="modalStaff">N/A</span></p>
+                        <p><strong>Start:</strong> <span id="modalStartTime">N/A</span></p>
+                        <p><strong>Amount:</strong> <span id="modalAmount">N/A</span></p>
+                        <p><strong>Notes:</strong> <span id="modalNotes">N/A</span></p>
+                        <p><strong>Current Status:</strong> <span id="modalStatusBadge">N/A</span>
+                        </p>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Average Daily Sales -->
-        <div class="col-xl-3 col-sm-6">
+        {{-- <div class="col-xl-3 col-sm-6">
             <div class="card h-100">
                 <div class="card-header pb-0">
-                    <h5 class="mb-3 card-title">Average Daily Sales</h5>
-                    <p class="mb-0 text-body">Total Sales This Month</p>
+                    <h5 class="mb-3 card-title">Cancel Appointment</h5>
                     <h4 class="mb-0">$28,450</h4>
                 </div>
                 <div class="card-body px-0">
@@ -199,9 +198,153 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!--/ Sales Overview -->
 
-      
+
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#team_table').DataTable({
+                processing: true,
+                responsive: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('user.myappointment.data') }}",
+                    type: 'GET',
+                    cache: false
+                },
+                columns: [{
+                        title: 'SL',
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        title: 'Name',
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        title: 'Email',
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        title: 'Phone',
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        title: 'Consultant',
+                        data: 'consultant',
+                        name: 'consultant'
+                    },
+                    {
+                        title: 'Date',
+                        data: 'date',
+                        name: 'date'
+                    },
+
+                    {
+                        title: 'Payment Date',
+                        data: 'payment_date',
+                        name: 'payment_date'
+                    },
+
+                    {
+                        title: 'Status',
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        title: 'Action',
+                        data: 'action',
+                        name: 'action'
+                    }
+                ]
+            });
+            $(document).on('click', '.tableDelete', function() {
+                swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let Id = $(this).data('id'); // Retrieve the ID for deletion
+                        $.ajax({
+                            url: "{{ route('admin.account.team.destroy') }}",
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}", // Include CSRF token for security
+                                delete: Id
+                            },
+                            success: function(response) {
+                                // Assuming the deletion was successful, refresh the table
+                                $('#team_table').DataTable().draw(true);
+
+                                Swal.fire("Deleted!",
+                                    "The item has been deleted successfully.", {
+                                        icon: "success",
+                                    });
+                            },
+                            error: function(xhr) {
+                                // Handle error
+                                Swal.fire("Error!",
+                                    "There was an issue deleting the item.", "error"
+                                );
+                            }
+                        });
+                    } else {
+                        Swal.fire("Your item is safe!");
+                    }
+                });
+            });
+
+
+        });
+    </script>
+    <script>
+        $(document).on('click', '.view-appointment-btn', function() {
+
+            // Set modal fields
+            $('#modalAppointmentId').val($(this).data('id'));
+            $('#modalAppointmentName').text($(this).data('name'));
+
+            $('#modalEmail').text($(this).data('email'));
+            $('#modalPhone').text($(this).data('phone'));
+            $('#modalStaff').text($(this).data('employee'));
+            $('#modalStartTime').text($(this).data('start'));
+            $('#modalAmount').text($(this).data('amount'));
+            $('#modalNotes').text($(this).data('notes'));
+            $('#modalStatus').text($(this).data('nostatustes'));
+
+            // Set status select dropdown
+            var status = $(this).data('status');
+            $('#modalStatusSelect').val(status);
+
+            // Set status badge
+            var statusColors = {
+                'Pending payment': '#f39c12',
+                'Processing': '#3498db',
+                'Confirmed': '#2ecc71',
+                'Cancelled': '#ff0000',
+                'Completed': '#008000',
+                'On Hold': '#95a5a6',
+                'Rescheduled': '#f1c40f',
+                'No Show': '#e67e22',
+            };
+
+            var badgeColor = statusColors[status] || '#7f8c8d';
+            $('#modalStatusBadge').html(
+                `<span class="badge px-2 py-1" style="background-color: ${badgeColor}; color: white;">${status}</span>`
+            );
+        });
+    </script>
 @endsection

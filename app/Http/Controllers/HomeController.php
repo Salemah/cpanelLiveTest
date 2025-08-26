@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
@@ -79,7 +80,7 @@ class HomeController extends Controller
                     return null;
                 }
             })->filter();
-     
+
         //     return view('backend.dashboard.index', compact('appointments'));
         // }
         return view('backend.admin_dashboard', compact('appointments'));
@@ -101,6 +102,12 @@ class HomeController extends Controller
     }
      public function UserDashboard(Request $request)
     {
-        return view('backend.user_panel');
+        $appointmenttoday = Appointment::where('user_id', Auth::id())
+            ->whereDate('booking_date', Carbon::today())
+            ->first();
+        $appointmentUpComing = Appointment::where('user_id', Auth::id())
+            ->whereDate('booking_date','>', Carbon::today())
+            ->first();
+        return view('backend.user_panel',compact('appointmenttoday', 'appointmentUpComing'));
     }
 }

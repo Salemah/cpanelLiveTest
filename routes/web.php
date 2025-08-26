@@ -88,10 +88,13 @@ Route::middleware('auth')->group(function () {
     Route::post('change_password', [ProfileController::class, 'UserChangePassword'])->name('account.profile.change.password.insert');
 
     Route::get('my_appointment', [UserController::class, 'UserAppointment'])->name('user.appointment');
+    Route::get('my_appointment_data', [UserController::class, 'UserAppointmentData'])->name('user.myappointment.data');
     // Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
 
+    //user profile update
 
-
+    Route::get('/user/profile', [ProfileController::class, 'UserProfileedit'])->name('user.profile.edit');
+    Route::post('user/profile_update', [ProfileController::class, 'ProfileUpdate'])->name('user.profile.update');
 
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {

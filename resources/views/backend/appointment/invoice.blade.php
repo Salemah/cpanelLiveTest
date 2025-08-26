@@ -28,7 +28,7 @@
         }
 
         .invoice-header img {
-            max-height: 60px;
+            max-height: 300px;
         }
 
         .invoice-status {
@@ -156,9 +156,9 @@
         </a>
         <!-- Header -->
         <div class="invoice-header">
-            <img src="{{ asset('arc.jpg') }}" alt="Logo">
+            <img src="{{ asset('arc.jpg') }}" alt="Logo" >
             <div>
-                @if ($data['appointment']->status != 'Confirmed')
+                @if ($data['appointment']->status != 'Confirmed' && $data['appointment']->status != 'Processing')
                 <a href="{{route('payment.instruction',['id'=>$data['appointment']->id])}}"
                 style="
                 display: inline-block;

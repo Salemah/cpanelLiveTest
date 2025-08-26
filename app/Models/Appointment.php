@@ -17,11 +17,15 @@ class Appointment extends Model
     public function employee()
     {
 
-        return $this->belongsTo(Team::class,'team_id');
+        return $this->belongsTo(Team::class, 'team_id');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function payment()
+    {
+        return $this->hasOne(PaymentReceive::class, 'appointment_id', 'id');
     }
 }

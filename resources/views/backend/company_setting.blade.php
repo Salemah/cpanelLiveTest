@@ -101,6 +101,26 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="col-6 my-3">
+                            <label class="form-label" for="fullname">Bkash Number <span class="text-danger">*</span> </label>
+                            <input type="text" id="bkash_number" name="bkash_number" value="@if($DashboardSetting){{$DashboardSetting->bkash_number}}@endif" class="form-control"
+                                placeholder="Bkash Number" />
+                            @error('bkash_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-6 my-3">
+                            <label class="form-label" for="fullname">Logo Url<span class="text-danger">*</span> </label>
+                            <input type="text" id="logo_url" name="logo_url" value="@if($DashboardSetting){{$DashboardSetting->logo_url}}@endif" class="form-control"
+                                placeholder="Logo Url" />
+                            @error('logo_url')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="col-12 my-3">
                             <label class="form-label" for="fullname">Description <span class="text-danger">*</span>
                             </label>

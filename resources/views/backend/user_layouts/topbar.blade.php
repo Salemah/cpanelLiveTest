@@ -37,7 +37,7 @@
              </li>
 
              <!-- Style Switcher -->
-             <li class="nav-item dropdown-style-switcher dropdown">
+             {{-- <li class="nav-item dropdown-style-switcher dropdown">
                  <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow"
                      href="javascript:void(0);" data-bs-toggle="dropdown">
                      <i class='ti ti-md'></i>
@@ -384,7 +384,7 @@
                          </div>
                      </li>
                  </ul>
-             </li>
+             </li> --}}
              <!--/ Notification -->
 
              <!-- User -->
@@ -405,7 +405,7 @@
                  </a>
                  <ul class="dropdown-menu dropdown-menu-end">
                      <li>
-                         <a class="dropdown-item mt-0" href="{{ route('profile.edit') }}">
+                         <a class="dropdown-item mt-0" href="{{ route('user.profile.edit') }}">
                              <div class="d-flex align-items-center">
                                  <div class="flex-shrink-0 me-2">
                                      <div class="avatar avatar-online">
@@ -445,7 +445,7 @@
                          <div class="dropdown-divider my-1 mx-n2"></div>
                      </li>
                      <li>
-                         <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                         <a class="dropdown-item" href="{{ route('user.profile.edit') }}">
                              <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">My
                                  Profile</span>
                          </a>
