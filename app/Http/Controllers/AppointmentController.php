@@ -7,6 +7,7 @@ use App\Events\StatusUpdated;
 use App\Mail\Appointmail;
 use App\Mail\DemoMail;
 use App\Mail\InvoiceMail;
+use App\Mail\PaidInvoiceMail;
 use App\Models\Appointment;
 use App\Models\BkashPaymentSubmit;
 use App\Models\CompanySetting;
@@ -210,6 +211,31 @@ class AppointmentController extends Controller
 
                 ]
             );
+
+            $Setting = CompanySetting::first();
+            // invoice mail send
+            $appointment = $appointment;
+
+            $data = [
+                'logo' => $Setting->logo,
+                'title' => $Setting->title,
+                'appointment' => $appointment,
+                'Setting' => $Setting,
+                'paymentReceive' => $paymentReceive,
+
+            ];
+            $datas["title"] = $Setting->title;
+            $datas["payment_date"] = $paymentReceive->payment_date;
+
+            $datas["appointment"] = $appointment;
+
+            $datas["Setting"] = $Setting;
+            $datas["paymentReceive"] = $paymentReceive;
+
+            $pdf = Pdf::loadView('backend.appointment.paid_invoicepdf', $datas);
+
+            $dynamicSubject = $Setting->title . ' - Booking Invoice ' . $appointment->name;
+            Mail::to($appointment->email)->send(new PaidInvoiceMail($data, $dynamicSubject, $pdf));
         }
 
         event(new StatusUpdated($appointment));

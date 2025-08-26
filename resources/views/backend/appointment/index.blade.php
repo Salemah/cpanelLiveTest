@@ -107,7 +107,7 @@
                                                 <select name="status" class="form-control" id="modalStatusSelect">
                                                     <option value="Pending payment">Pending payment</option>
                                                     <option value="Processing">Processing</option>
-                                                    <option value="Confirmed">Confirmed</option>
+                                                    {{-- <option value="Confirmed">Confirmed</option> --}}
                                                     <option value="Cancelled">Cancelled</option>
                                                     <option value="Completed">Completed</option>
                                                     <option value="On Hold">On Hold</option>
