@@ -339,6 +339,8 @@
                     <div class="f-profile text-center">
 
                         <input type="hidden" name="team_id" id="team_id" value="{{ $team->id }}">
+                       <img style="max-height: 150px" src="{{ asset($team->image) }}" class="fp-image img-fluid"
+                                        alt="{{ $team->name }} {{ $team->position }}">
                         <h4>{{ $team->name }}</h4>
                         <h5>{{ $team->positions }}</h5>
                         <p>{!! $team->details !!}</p>

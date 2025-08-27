@@ -34,7 +34,7 @@
                                         </div>
                                     </div>
                                     <div class="fpw-overlay-btm"></div>
-                                    <img src="{{ asset($team->image) }}" class="fp-image img-fluid"
+                                    <img style="max-height: 400px" src="{{ asset($team->image) }}" class="fp-image img-fluid"
                                         alt="{{ $team->name }} {{ $team->position }}">
                                 </div>
                                 <h4>{{ $team->name }}</h4>
@@ -44,7 +44,7 @@
                     @endforeach
                 @endif
 
-                <div class="col-lg-4 col-md-6 col-sm-6 mb30 wow fadeInRight" data-wow-delay=".4s">
+                {{-- <div class="col-lg-4 col-md-6 col-sm-6 mb30 wow fadeInRight" data-wow-delay=".4s">
                     <div class="f-profile text-center">
                         <div class="fp-wrap f-invert">
                             <div class="fpw-overlay">
@@ -83,7 +83,7 @@
                         <h4>John Shepard</h4>
                         Associate
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -294,7 +294,7 @@
                     <h3 class="no-bottom">Contact Us Now! Get a Free Consultation for Your Case.</h3>
                 </div>
                 <div class="col-md-4 text-lg-end rtl-lg-start text-sm-center wow fadeInRight">
-                    <a href="{{route('frontend.make_appointment')}}" class="btn-custom btn-black text-white light">Make Appointment</a>
+                    <a href="{{route('frontend.our.team')}}" class="btn-custom btn-black text-white light">Make Appointment</a>
                 </div>
             </div>
         </div>
