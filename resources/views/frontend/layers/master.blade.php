@@ -51,7 +51,7 @@
     top: 0;
     left: 0;
     z-index: 1000;
-    background: transparent !important; /* semi-transparent black */
+    background: rgba(0, 0, 0, 0.5) !important; /* semi-transparent black */
     transition: transform 0.3s ease-in-out, background 0.3s ease-in-out ;
 }
 
