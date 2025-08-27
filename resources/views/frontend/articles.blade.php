@@ -52,7 +52,7 @@
                 @if ($Articles)
                     @forelse ($Articles as $article)
                         <div class="col-lg-4 col-md-6 mb30">
-                            <a href="{{ route('frontend.articles.details',['id' => $article->id]) }}">
+                            <a href="{{ route('frontend.articles.details',Hashids::encode($article->id)) }}">
                                 <div class="bloglist item">
                                     <div class="post-content">
                                         <div class="date-box">

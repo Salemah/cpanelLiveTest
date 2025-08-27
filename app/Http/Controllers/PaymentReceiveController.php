@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentReceive;
 use Illuminate\Http\Request;
+use Vinkla\Hashids\Facades\Hashids;
 use Yajra\DataTables\Facades\DataTables;
 
 class PaymentReceiveController extends Controller
@@ -84,7 +85,7 @@ class PaymentReceiveController extends Controller
         data-status="' . $data->appointment->status . '">
         View
     </button> ';
-                $htmlData .= ' <a href="' . route('pdf.download', $data->appointment->id) . '"class="btn btn-info btn-sm py-0 px-1">Invoice</a>';
+                $htmlData .= ' <a href="' . route('pdf.download',  Hashids::encode($data->appointment->id)) . '"class="btn btn-info btn-sm py-0 px-1">Invoice</a>';
                 return $htmlData;
             })
             ->rawColumns(['action', 'status'])
