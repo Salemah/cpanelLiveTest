@@ -32,14 +32,35 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @include('frontend.layers.style')
     @yield('css')
-    {{-- <style>
-         .ripple-wave {
-  pointer-events: none;
+    <style>
+        /* header.scrolled {
+    background: transparent !important;
 }
-.ripple-wave.active {
-  all: unset; /* Remove all styles applied by active */
+.transparent{
+      position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+     background: rgba(0, 0, 0, 0.4) !important;
+    box-shadow: none !important;
+} */
+ header.transparent {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: transparent !important; /* semi-transparent black */
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out ;
 }
-    </style> --}}
+
+/* hide state */
+header.transparent.hide {
+    transform: translateY(-100%) ;
+}
+    </style>
+
 </head>
 
 <body>
@@ -162,7 +183,24 @@
     ================================================== -->
     @include('frontend.layers.script')
     @yield('script')
+<script>
+let lastScrollTop = 0;
+const header = document.querySelector("header.transparent");
 
+window.addEventListener("scroll", function () {
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+        // scrolling down → hide header
+        header.classList.add("hide");
+    } else {
+        // scrolling up → show header
+        header.classList.remove("hide");
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // avoid negative
+});
+</script>
 </body>
 
 </html>
