@@ -95,7 +95,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/profile', [ProfileController::class, 'UserProfileedit'])->name('user.profile.edit');
     Route::post('user/profile_update', [ProfileController::class, 'ProfileUpdate'])->name('user.profile.update');
-
+    Route::get('user/change_password', [ProfileController::class, 'Userchange_password'])->name('user.profile.change.password');
+    Route::post('user/change_password', [ProfileController::class, 'ChangePassword'])->name('user.profile.change.password.insert');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {
         Route::get('/dashboard', [HomeController::class, 'Dashboard'])->name('dashboard');

@@ -451,7 +451,7 @@
                          </a>
                      </li>
                        <li>
-                        <a class="dropdown-item" href="{{ route('account.profile.change.password') }}">
+                        <a class="dropdown-item" href="{{ route('user.profile.change.password') }}">
                             <i class="ti ti-key me-2 ti-sm"></i>
                             <span class="align-middle">Change Password</span>
                         </a>

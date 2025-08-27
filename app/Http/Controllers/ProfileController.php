@@ -191,7 +191,37 @@ class ProfileController extends Controller
     {
         return view('profile.change_password');
     }
+    public function Userchange_password()
+    {
+        return view('profile.user_change_password');
+    }
     public function UserChangePassword(Request $request)
+    {
+
+        $user = Auth::user();
+        //dd($user);
+        $request->validate(array(
+            'current_password'      =>  'required',
+            'new_password'    =>  'required'
+        ));
+
+        if (Hash::check($request->current_password, $user->password)) {
+            DB::table('users')
+                ->where('id', Auth::id())
+                ->update(['password' => Hash::make($request->new_password)]);
+            Session::flash('success', 'Current Password Changed Successfully!');
+            // Log out the user
+            Auth::logout();
+
+            // Redirect to login page after logging out
+            return redirect('/login')->with('message', 'Password changed successfully, please log in again.');
+        } else {
+            Session::flash('current_password_not_valid', 'Current Password Is Not Correct!');
+
+            return redirect('change_password');
+        }
+    }
+    public function ChangePassword(Request $request)
     {
 
         $user = Auth::user();
