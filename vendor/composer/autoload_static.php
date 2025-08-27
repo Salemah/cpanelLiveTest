@@ -62,10 +62,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
-        'V' => 
-        array (
-            'Vinkla\\Hashids\\' => 15,
-        ),
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
@@ -168,10 +164,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
             'Illuminate\\Support\\' => 19,
             'Illuminate\\' => 11,
         ),
-        'H' => 
-        array (
-            'Hashids\\' => 8,
-        ),
         'G' => 
         array (
             'GuzzleHttp\\UriTemplate\\' => 23,
@@ -179,7 +171,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
             'GrahamCampbell\\ResultType\\' => 26,
-            'GrahamCampbell\\Manager\\' => 23,
         ),
         'F' => 
         array (
@@ -245,10 +236,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
-        ),
-        'Vinkla\\Hashids\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/vinkla/hashids/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -555,10 +542,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
-        'Hashids\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/hashids/hashids/src',
-        ),
         'GuzzleHttp\\UriTemplate\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/uri-template/src',
@@ -578,10 +561,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
-        ),
-        'GrahamCampbell\\Manager\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/graham-campbell/manager/src',
         ),
         'Fruitcake\\Cors\\' => 
         array (
@@ -705,7 +684,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'App\\Http\\Controllers\\LawCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/LawCategoryController.php',
         'App\\Http\\Controllers\\LegalAreaController' => __DIR__ . '/../..' . '/app/Http/Controllers/LegalAreaController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
-        'App\\Http\\Controllers\\PaymentReceiveController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentReceiveController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\ReputationController' => __DIR__ . '/../..' . '/app/Http/Controllers/ReputationController.php',
         'App\\Http\\Controllers\\SlotController' => __DIR__ . '/../..' . '/app/Http/Controllers/SlotController.php',
@@ -716,7 +694,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'App\\Http\\Controllers\\UserManagementController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserManagementController.php',
         'App\\Http\\Controllers\\WeDidController' => __DIR__ . '/../..' . '/app/Http/Controllers/WeDidController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
-        'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
@@ -730,16 +707,12 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Mail\\Appointmail' => __DIR__ . '/../..' . '/app/Mail/Appointmail.php',
         'App\\Mail\\DemoMail' => __DIR__ . '/../..' . '/app/Mail/DemoMail.php',
-        'App\\Mail\\Invoice' => __DIR__ . '/../..' . '/app/Mail/Invoice.php',
-        'App\\Mail\\InvoiceMail' => __DIR__ . '/../..' . '/app/Mail/InvoiceMail.php',
         'App\\Mail\\MyTestMail' => __DIR__ . '/../..' . '/app/Mail/MyTestMail.php',
-        'App\\Mail\\PaidInvoiceMail' => __DIR__ . '/../..' . '/app/Mail/PaidInvoiceMail.php',
         'App\\Mail\\UserGreetingMail' => __DIR__ . '/../..' . '/app/Mail/UserGreetingMail.php',
         'App\\Models\\AboutUs' => __DIR__ . '/../..' . '/app/Models/AboutUs.php',
         'App\\Models\\Appointment' => __DIR__ . '/../..' . '/app/Models/Appointment.php',
         'App\\Models\\Article' => __DIR__ . '/../..' . '/app/Models/Article.php',
         'App\\Models\\Banner' => __DIR__ . '/../..' . '/app/Models/Banner.php',
-        'App\\Models\\BkashPaymentSubmit' => __DIR__ . '/../..' . '/app/Models/BkashPaymentSubmit.php',
         'App\\Models\\CompanySetting' => __DIR__ . '/../..' . '/app/Models/CompanySetting.php',
         'App\\Models\\ContactUs' => __DIR__ . '/../..' . '/app/Models/ContactUs.php',
         'App\\Models\\ContactUsMessage' => __DIR__ . '/../..' . '/app/Models/ContactUsMessage.php',
@@ -750,7 +723,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'App\\Models\\LawCategory' => __DIR__ . '/../..' . '/app/Models/LawCategory.php',
         'App\\Models\\LegalArea' => __DIR__ . '/../..' . '/app/Models/LegalArea.php',
         'App\\Models\\Like' => __DIR__ . '/../..' . '/app/Models/Like.php',
-        'App\\Models\\PaymentReceive' => __DIR__ . '/../..' . '/app/Models/PaymentReceive.php',
         'App\\Models\\PermissionCategory' => __DIR__ . '/../..' . '/app/Models/PermissionCategory.php',
         'App\\Models\\Reputation' => __DIR__ . '/../..' . '/app/Models/Reputation.php',
         'App\\Models\\Slot' => __DIR__ . '/../..' . '/app/Models/Slot.php',
@@ -1722,9 +1694,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'FontLib\\WOFF\\TableDirectoryEntry' => __DIR__ . '/..' . '/dompdf/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php',
         'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
         'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
-        'GrahamCampbell\\Manager\\AbstractManager' => __DIR__ . '/..' . '/graham-campbell/manager/src/AbstractManager.php',
-        'GrahamCampbell\\Manager\\ConnectorInterface' => __DIR__ . '/..' . '/graham-campbell/manager/src/ConnectorInterface.php',
-        'GrahamCampbell\\Manager\\ManagerInterface' => __DIR__ . '/..' . '/graham-campbell/manager/src/ManagerInterface.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
         'GrahamCampbell\\ResultType\\Result' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Result.php',
         'GrahamCampbell\\ResultType\\Success' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Success.php',
@@ -2114,11 +2083,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
-        'Hashids\\Hashids' => __DIR__ . '/..' . '/hashids/hashids/src/Hashids.php',
-        'Hashids\\HashidsInterface' => __DIR__ . '/..' . '/hashids/hashids/src/HashidsInterface.php',
-        'Hashids\\Math\\BCMath' => __DIR__ . '/..' . '/hashids/hashids/src/Math/BCMath.php',
-        'Hashids\\Math\\Gmp' => __DIR__ . '/..' . '/hashids/hashids/src/Math/Gmp.php',
-        'Hashids\\Math\\MathInterface' => __DIR__ . '/..' . '/hashids/hashids/src/Math/MathInterface.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Events\\GateEvaluated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Events/GateEvaluated.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',
@@ -8269,10 +8233,6 @@ class ComposerStaticInitfd45821a143e802582f2babf1351e2d7
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-        'Vinkla\\Hashids\\Facades\\Hashids' => __DIR__ . '/..' . '/vinkla/hashids/src/Facades/Hashids.php',
-        'Vinkla\\Hashids\\HashidsFactory' => __DIR__ . '/..' . '/vinkla/hashids/src/HashidsFactory.php',
-        'Vinkla\\Hashids\\HashidsManager' => __DIR__ . '/..' . '/vinkla/hashids/src/HashidsManager.php',
-        'Vinkla\\Hashids\\HashidsServiceProvider' => __DIR__ . '/..' . '/vinkla/hashids/src/HashidsServiceProvider.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',

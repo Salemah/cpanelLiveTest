@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Vinkla\Hashids\Facades\Hashids;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -93,8 +92,7 @@ class UserController extends Controller
         data-status="' . $data->status . '">
         View
     </button> ';
-                $htmlData .= ' <a href="' . route('pdf.download',
-                Hashids::encode($data->id)) . '"class="btn btn-info btn-sm py-0 px-1">Invoice</a>';
+                $htmlData .= ' <a href="' . route('pdf.download', $data->id) . '"class="btn btn-info btn-sm py-0 px-1">Invoice</a>';
                 return $htmlData;
             })
             ->rawColumns(['action', 'status'])

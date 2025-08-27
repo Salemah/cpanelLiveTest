@@ -22,7 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Spatie\OpeningHours\OpeningHours;
 
-use Vinkla\Hashids\Facades\Hashids;
+
 class FrontendController extends Controller
 {
     public function Home(Request $request)
@@ -55,23 +55,13 @@ class FrontendController extends Controller
             'teams' => Team::where('status', 'Active')->get(),
         ]);
     }
-    public function TeamDetails(Request $request, $hashid)
+    public function TeamDetails(Request $request)
     {
 
         $categories = LegalArea::get();
 
         $employees = Team::get();
-
-        // Decode the hashid
-        $decoded = Hashids::decode($hashid);
-
-        if (empty($decoded)) {
-            abort(404, 'Invalid article link');
-        }
-
-        $articleId = $decoded[0];
-        $team = Team::find($articleId);
-       
+        $team = Team::find($request->id);
         $Setting = CompanySetting::first();
 
         return view('frontend.team_details', compact('categories', 'Setting', 'employees', 'team'));
@@ -221,33 +211,11 @@ class FrontendController extends Controller
 
         return view('frontend.practice_area', compact('LegalAreas'));
     }
-    // public function ArticlesDetails(Request $request)
-    // {
-    //     $article = Article::find($request->id);
-    //     $articles = Article::where('status', 'Active')->latest()->take(6)->get();
-    //     $tags = Tag::whereIn('id', explode(',', $article->tag_id))->get(['id', 'name']);
-
-
-    //     return view('frontend.article_details', compact('article', 'tags', 'articles'));
-    // }
-    public function ArticlesDetails(Request $request, $hashid)
+    public function ArticlesDetails(Request $request)
     {
-        // Decode the hashid
-        $decoded = Hashids::decode($hashid);
-
-        if (empty($decoded)) {
-            abort(404, 'Invalid article link');
-        }
-
-        $articleId = $decoded[0];
-
-        // Fetch the article by decoded ID
-        $article = Article::findOrFail($articleId);
-
-        // Fetch related data
+        $article = Article::find($request->id);
         $articles = Article::where('status', 'Active')->latest()->take(6)->get();
         $tags = Tag::whereIn('id', explode(',', $article->tag_id))->get(['id', 'name']);
-
         return view('frontend.article_details', compact('article', 'tags', 'articles'));
     }
     protected function generateTimeSlots($availableRanges, $slotDuration, $breakDuration, $date, $employeeId)
