@@ -260,7 +260,7 @@
                                                                 data-notes="{{ $appointment->notes }}"
                                                                 data-status="{{ $appointment->status }}">View</button>
 
-                                                            <a href="{{ route('pdf.download', ['id' => $appointment->id]) }}"
+                                                            <a href="{{ route('pdf.download', Hashids::encode($appointment->id)) }}"
                                                                 class="btn btn-info btn-sm py-0 px-1">Invoice</a>
                                                         </td>
                                                     </tr>
