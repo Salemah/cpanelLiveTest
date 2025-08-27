@@ -44,12 +44,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'Home'])->name('home');
 Route::get('about_us', [FrontendController::class, 'AboutUs'])->name('frontend.about.us');
 Route::get('our_team', [FrontendController::class, 'OurTeam'])->name('frontend.our.team');
-Route::get('team_details/{hashid}', [FrontendController::class, 'TeamDetails'])->name('frontend.team_details');
+Route::get('team_details/{id?}', [FrontendController::class, 'TeamDetails'])->name('frontend.team_details');
 Route::get('faq', [FrontendController::class, 'Faq'])->name('frontend.faq');
 Route::get('articles', [FrontendController::class, 'Articles'])->name('frontend.articles');
 Route::get('contact', [FrontendController::class, 'ContactUs'])->name('frontend.contact');
 Route::get('practice_area/{id?}', [FrontendController::class, 'practiceArea'])->name('frontend.practice.area');
-Route::get('articles_details/{hashid}', [FrontendController::class, 'ArticlesDetails'])->name('frontend.articles.details');
+Route::get('articles_details/{id?}', [FrontendController::class, 'ArticlesDetails'])->name('frontend.articles.details');
 Route::get('articles_by_legal_area/{id?}', [FrontendController::class, 'ArticlesByLegalArea'])->name('frontend.articles.by_legal_area');
 Route::get('articles_by_tag/{id?}', [FrontendController::class, 'ArticlesByTag'])->name('frontend.articles.by_tag');
 Route::get('make_appointment/{id?}', [FrontendController::class, 'MakeAppointment'])->name('frontend.make_appointment');
@@ -68,7 +68,7 @@ Route::post('contact_us_message_insert', [ContactUsMessageController::class, 'Co
 
 Route::post('signin-process', [LoginController::class, 'SignInProcess'])->name('sign-in.process');
 Route::post('signUp-process', [LoginController::class, 'SignUpProcess'])->name('sign-Up.process');
-Route::get('/download-pdf/{hashid}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
+Route::get('/download-pdf/{id?}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
 
 Route::get('/payment/{id?}', [AppointmentController::class, 'PaymentInstruction'])->name('payment.instruction');
 Route::post('/payment-submit', [AppointmentController::class, 'PaymentSubmit'])->name('appointments.payment.submit');

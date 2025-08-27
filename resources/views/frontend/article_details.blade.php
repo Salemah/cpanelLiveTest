@@ -28,13 +28,10 @@
                 <div class="col-md-8">
 
                     <div class="blog-read">
-                        <h4
-                            style="font-family: 'Merriweather', serif /* match TinyMCE font */
+                        <h4 style="font-family: 'Merriweather', serif /* match TinyMCE font */
     font-size: 20px;
-    font-weight: bold;">
-                            {{ $article->title }}<span></span></h4>
-                        <img alt="" src="{{ asset($article->image) }}" style="max-height: 300px"
-                            class="img-fullwidthk">
+    font-weight: bold;">{{ $article->title }}<span></span></h4>
+                        <img alt="" src="{{ asset($article->image) }}" style="max-height: 300px" class="img-fullwidthk">
                         <div class="post-text">
                             <p>{!! $article->description !!}</p>
                             <blockquote>{{ $article->quote }}</blockquote>
@@ -53,7 +50,7 @@
                                 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                 officia deserunt mollit anim id
                                 est laborum.</p> --}}
-                            <p>{{ $article->user->name }}</p> <br>
+                                <p>{{ $article->user->name }}</p> <br>
                             <div class="d-flex flex-row mb-3">
 
                                 <span class="post-date">{{ \Carbon\Carbon::parse($article->date)->format('M d,Y') }}</span>
@@ -190,7 +187,7 @@
                                 @foreach ($articles as $article)
                                     <li><span
                                             class="date">{{ \Carbon\Carbon::parse($article->date)->format('d M') }}</span><a
-                                            href="{{ route('frontend.articles.details', Hashids::encode($article->id)) }}">{{ $article->title }}</a>
+                                            href="{{ route('frontend.articles.details', ['id' => $article->id]) }}">{{ $article->title }}</a>
                                     </li>
                                     {{-- <li><span class="date">22 Jun</span><a href="#">Six firms that are setting the
                                     trend</a></li>

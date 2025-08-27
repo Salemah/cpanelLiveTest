@@ -98,7 +98,7 @@
       <p>
         You can login to your client area to view  invoice or Call Us</a>
       </p>
-      <p>Or the invoice at <a href="{{ route('pdf.download', Hashids::encode($data['appointment']->id)) }}">{{$data['appointment']->website }}/invoice/{{$data['appointment']->booking_id}}</a></p>
+      <p>Or the invoice at <a href="{{ route('pdf.download', ['id' => $data['appointment']->id]) }}">{{$data['appointment']->website }}/invoice/{{$data['appointment']->booking_id}}</a></p>
 
       <p>Regards, <br>
       System Administrator <br>
