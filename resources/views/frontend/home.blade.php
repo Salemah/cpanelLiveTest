@@ -28,7 +28,7 @@
                                                 {{-- <a href="{{ $team->facebook }}"><i class="fa fa-facebook fa-lg"></i></a>
                                                 <a href="{{ $team->twitter }}"><i class="fa fa-twitter fa-lg"></i></a>
                                                 <a href="{{ $team->linkedin }}"><i class="fa fa-linkedin fa-lg"></i></a> --}}
-                                                 <a class="text-dark" title="Make Appointment" href="{{ route('frontend.team_details',['id' => $team->id]) }}">Make Appointment</a>
+                                                 <a class="text-dark" title="Make Appointment" href="{{ route('frontend.team_details',Hashids::encode($team->id)) }}">Make Appointment</a>
                                                 {{-- <a href="#"><i class="fa fa-pinterest fa-lg"></i></a> --}}
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@
 
                     @foreach ($Articles as $article)
                         <div class="col-lg-4 col-md-6 mb30">
-                            <a href="{{ route('frontend.articles.details', ['id' => $article->id]) }}">
+                            <a href="{{ route('frontend.articles.details', Hashids::encode($article->id)) }}">
                                 <div class="bloglist item">
                                     <div class="post-content">
                                         <div class="date-box">

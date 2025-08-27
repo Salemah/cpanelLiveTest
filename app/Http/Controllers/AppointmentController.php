@@ -118,7 +118,7 @@ class AppointmentController extends Controller
             'message' => 'Appointment booked successfully!',
             'booking_id' => $appointment->booking_id,
             'appointment' => $appointment,
-            'appointment_id' => $appointment->id,
+            'appointment_id' => Hashids::encode($appointment->id),
         ]);
     }
 
