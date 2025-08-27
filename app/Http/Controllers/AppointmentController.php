@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Vinkla\Hashids\Facades\Hashids;
 
 class AppointmentController extends Controller
 {
@@ -258,10 +259,19 @@ class AppointmentController extends Controller
 
         return back()->with('success', 'Status updated successfully');
     }
-    public function downloadPdf(Request $request)
+    public function downloadPdf(Request $request, $hashid)
     {
         $Setting = CompanySetting::first();
-        $appointment = Appointment::findOrFail($request->id);
+
+        // Decode the hashid
+        $decoded = Hashids::decode($hashid);
+
+        if (empty($decoded)) {
+            abort(404, 'Invalid article link');
+        }
+
+        $articleId = $decoded[0];
+        $appointment = Appointment::findOrFail($articleId);
         $data = [
 
             'date'  => now()->toDateString(),
@@ -308,7 +318,8 @@ class AppointmentController extends Controller
         return response()->json([
             'success'  => true,
             'message'  => 'Payment submitted successfully.',
-            'redirect' => route('pdf.download', $request->appointment_id) // 👉 create this route
+            'redirect' => route('pdf.download',
+                    Hashids::encode($request->appointment_id)) // 👉 create this route
         ]);
     }
 }
