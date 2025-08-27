@@ -28,7 +28,10 @@
                 <div class="col-md-8">
 
                     <div class="blog-read">
-                        <img alt="" src="{{ asset($article->image) }}" class="img-fullwidth">
+                        <h4 style="font-family: 'Merriweather', serif /* match TinyMCE font */
+    font-size: 20px;
+    font-weight: bold;">{{ $article->title }}<span></span></h4>
+                        <img alt="" src="{{ asset($article->image) }}" style="max-height: 300px" class="img-fullwidthk">
                         <div class="post-text">
                             <p>{!! $article->description !!}</p>
                             <blockquote>{{ $article->quote }}</blockquote>
@@ -47,15 +50,17 @@
                                 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                 officia deserunt mollit anim id
                                 est laborum.</p> --}}
-                                <div class="d-flex flex-row mb-3">
-                            <span class="post-date">{{ \Carbon\Carbon::parse($article->date)->format('M d,Y') }}</span>
-                            {{-- <span class="post-comment">1</span> --}}
-                            {{-- <span class="post-like">181</span> --}}
+                                <p>{{ $article->user->name }}</p> <br>
+                            <div class="d-flex flex-row mb-3">
+
+                                <span class="post-date">{{ \Carbon\Carbon::parse($article->date)->format('M d,Y') }}</span>
+                                {{-- <span class="post-comment">1</span> --}}
+                                {{-- <span class="post-like">181</span> --}}
 
                                 <div class="like-box">
 
-<i id="like-{{ $article->id }}" data-post-id="{{ $article->id }}"
-                                        class="like fa-thumbs-up @if (auth()->user()){{ auth()->user()->hasLiked($article->id) ? 'fa-solid' : 'fa-regular' }} @else fa-regular   @endif"></i>
+                                    <i id="like-{{ $article->id }}" data-post-id="{{ $article->id }}"
+                                        class="like fa-thumbs-up @if (auth()->user()) {{ auth()->user()->hasLiked($article->id) ? 'fa-solid' : 'fa-regular' }} @else fa-regular @endif"></i>
 
 
                                     <span class="like-count">{{ $article->likes->count() }}</span>
@@ -63,7 +68,7 @@
                                         class="dislike fa-thumbs-down {{ auth()->user()->hasDisliked($article->id) ? 'fa-solid' : 'fa-regular' }}"></i>
                                     <span class="dislike-count">{{ $article->dislikes->count() }}</span> --}}
                                 </div>
-                                </div>
+                            </div>
 
 
                         </div>
