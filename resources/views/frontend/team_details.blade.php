@@ -510,7 +510,8 @@
                                                                 Conditions</label>
                                                             <div class="border p-3 rounded bg-light"
                                                                 style="text-align: left">
-                                                                <p style="color: red">
+                                                                {!! $Setting->term_condition !!}
+                                                                {{-- <p style="color: red">
                                                                     <strong>By booking a consultation with our law firm,
                                                                         you agree to the following:</strong>
                                                                 </p>
@@ -529,7 +530,7 @@
                                                                 <p>
                                                                     Please review these terms carefully before
                                                                     confirming your appointment.
-                                                                </p>
+                                                                </p> --}}
                                                             </div>
 
                                                             <div class="form-check ">

@@ -11,11 +11,15 @@
 
                 <div class="card-block container py-5">
                     <div class="row">
-                        <input type="hidden" name="id" value="@if($DashboardSetting){{$DashboardSetting->id}}@endif" id="hidden-id" disabled />
+                        <input type="hidden" name="id"
+                            value="@if ($DashboardSetting) {{ $DashboardSetting->id }} @endif" id="hidden-id"
+                            disabled />
                         <div class="col-12 my-3">
                             <label class="form-label" for="fullname">Company Title <span class="text-danger">*</span>
                             </label>
-                            <input type="text" id="title" value="@if($DashboardSetting){{$DashboardSetting->title}}@endif" name="system_title" class="form-control" placeholder="Ac..." />
+                            <input type="text" id="title"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->title }} @endif"
+                                name="system_title" class="form-control" placeholder="Ac..." />
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -24,8 +28,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Phone <span class="text-danger">*</span> </label>
-                            <input type="text" id="phone" name="phone" value="@if($DashboardSetting){{$DashboardSetting->phone}}@endif"  class="form-control"
-                                placeholder="01111111111" />
+                            <input type="text" id="phone" name="phone"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->phone }} @endif"
+                                class="form-control" placeholder="01111111111" />
                             @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -34,7 +39,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Email <span class="text-danger">*</span> </label>
-                            <input type="email" id="email" name="email" value="@if($DashboardSetting){{$DashboardSetting->email}}@endif" class="form-control" placeholder="Email" />
+                            <input type="email" id="email" name="email"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->email }} @endif"
+                                class="form-control" placeholder="Email" />
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -43,8 +50,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Facebook <span class="text-danger">*</span> </label>
-                            <input type="text" id="facebook" name="facebook" value="@if($DashboardSetting){{$DashboardSetting->facebook}}@endif" class="form-control"
-                                placeholder="Facebook" />
+                            <input type="text" id="facebook" name="facebook"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->facebook }} @endif"
+                                class="form-control" placeholder="Facebook" />
                             @error('facebook')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -53,8 +61,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Linkedin <span class="text-danger">*</span> </label>
-                            <input type="text" id="linkedin" name="linkedin" value="@if($DashboardSetting){{$DashboardSetting->linkedin}}@endif" class="form-control"
-                                placeholder="Linkedin" />
+                            <input type="text" id="linkedin" name="linkedin"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->linkedin }} @endif"
+                                class="form-control" placeholder="Linkedin" />
                             @error('linkedin')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -63,8 +72,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Twitter <span class="text-danger">*</span> </label>
-                            <input type="text" id="twitter" name="twitter" value="@if($DashboardSetting){{$DashboardSetting->twitter}}@endif" class="form-control"
-                                placeholder="Twitter" />
+                            <input type="text" id="twitter" name="twitter"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->twitter }} @endif"
+                                class="form-control" placeholder="Twitter" />
                             @error('twitter')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -73,8 +83,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Address <span class="text-danger">*</span> </label>
-                            <input type="text" id="address" name="address" value="@if($DashboardSetting){{$DashboardSetting->address}}@endif" class="form-control"
-                                placeholder="Address" />
+                            <input type="text" id="address" name="address"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->address }} @endif"
+                                class="form-control" placeholder="Address" />
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -83,8 +94,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Copyright <span class="text-danger">*</span> </label>
-                            <input type="text" id="copyright" name="copyright" value="@if($DashboardSetting){{$DashboardSetting->copyright}}@endif" class="form-control"
-                                placeholder="Copyright" />
+                            <input type="text" id="copyright" name="copyright"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->copyright }} @endif"
+                                class="form-control" placeholder="Copyright" />
                             @error('copyright')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -93,8 +105,9 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Website <span class="text-danger">*</span> </label>
-                            <input type="text" id="website" name="website" value="@if($DashboardSetting){{$DashboardSetting->website}}@endif" class="form-control"
-                                placeholder="Website" />
+                            <input type="text" id="website" name="website"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->website }} @endif"
+                                class="form-control" placeholder="Website" />
                             @error('website')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -102,9 +115,11 @@
                             @enderror
                         </div>
                         <div class="col-6 my-3">
-                            <label class="form-label" for="fullname">Bkash Number <span class="text-danger">*</span> </label>
-                            <input type="text" id="bkash_number" name="bkash_number" value="@if($DashboardSetting){{$DashboardSetting->bkash_number}}@endif" class="form-control"
-                                placeholder="Bkash Number" />
+                            <label class="form-label" for="fullname">Bkash Number <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" id="bkash_number" name="bkash_number"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->bkash_number }} @endif"
+                                class="form-control" placeholder="Bkash Number" />
                             @error('bkash_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -113,19 +128,25 @@
                         </div>
                         <div class="col-6 my-3">
                             <label class="form-label" for="fullname">Logo Url<span class="text-danger">*</span> </label>
-                            <input type="text" id="logo_url" name="logo_url" value="@if($DashboardSetting){{$DashboardSetting->logo_url}}@endif" class="form-control"
-                                placeholder="Logo Url" />
+                            <input type="text" id="logo_url" name="logo_url"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->logo_url }} @endif"
+                                class="form-control" placeholder="Logo Url" />
                             @error('logo_url')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+                        <div class="col-12 mb-6">
+                            <label for="recipient-name" class="col-form-label">Term Condition</label>
+                            <textarea name="term_condition" id="term_condition" cols="30" rows="10" class="form-control ckeditor"></textarea>
+                        </div>
                         <div class="col-12 my-3">
                             <label class="form-label" for="fullname">Description <span class="text-danger">*</span>
                             </label>
-                            <input type="text" id="description" value="@if($DashboardSetting){{$DashboardSetting->description}}@endif" name="description" class="form-control"
-                                placeholder="Description" />
+                            <input type="text" id="description"
+                                value="@if ($DashboardSetting) {{ $DashboardSetting->description }} @endif"
+                                name="description" class="form-control" placeholder="Description" />
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -164,7 +185,7 @@
     <script>
         $(document).ready(function() {
             console.log('Form submitted successfully');
-                $('#remainder_insert_update').ajaxForm({
+            $('#remainder_insert_update').ajaxForm({
                 beforeSend: formBeforeSend,
                 beforeSubmit: formBeforeSubmit,
                 error: formError,

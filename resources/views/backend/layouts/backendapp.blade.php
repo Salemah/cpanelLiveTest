@@ -189,6 +189,7 @@
                 'searchreplace visualblocks code fullscreen',
 
                 'insertdatetime media table paste code help wordcount', 'image'
+                
 
             ],
 

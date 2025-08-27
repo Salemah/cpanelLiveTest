@@ -55,6 +55,7 @@ class CompanySettingController extends Controller
             $data->website = $request->website;
             $data->bkash_number = $request->bkash_number;
             $data->logo_url = $request->logo_url;
+            $data->term_condition = $request->term_condition;
             $data->save();
 
         } catch (\Exception $e) {
