@@ -94,7 +94,7 @@
         </div>
 
         <div class="details">
-            <p>Merchant Number: <span class="highlight">{{ $Setting->phone }}</span></p>
+            <p>Merchant Number: <span class="highlight">{{ $Setting->bkash_number }}</span></p>
             <p>Amount to Pay: <span class="highlight">{{ $appointment->amount }} ৳ </span></p>
             <p>Please send the money to the above Bkash number.</p>
         </div>
