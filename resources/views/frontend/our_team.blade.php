@@ -40,13 +40,13 @@
                                                 {{-- <a href="{{ $team->facebook }}"><i class="fa fa-facebook fa-lg"></i></a>
                                                 <a href="{{ $team->twitter }}"><i class="fa fa-twitter fa-lg"></i></a>
                                                 <a href="{{ $team->linkedin }}"><i class="fa fa-linkedin fa-lg"></i></a> --}}
-                                                <a class="" title="Make Appointment" href="{{ route('frontend.team_details',['id' => $team->id]) }}">Make Appointment</a>
+                                                <a class="text-dark" title="Make Appointment" href="{{ route('frontend.team_details',['id' => $team->id]) }}">Make Appointment</a>
                                                 {{-- <a href="#"><i class="fa fa-pinterest fa-lg"></i></a> --}}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="fpw-overlay-btm"></div>
-                                    <img src="{{ asset($team->image) }}" class="fp-image img-fluid"
+                                    <img style="max-height: 400px" src="{{ asset($team->image) }}" class="fp-image img-fluid"
                                         alt="{{ $team->name }} {{ $team->position }}">
                                 </div>
                                 <h4>{{ $team->name }}</h4>
@@ -56,7 +56,7 @@
                     @endforeach
                 @endif
 
-                <div class="col-lg-4 col-md-6 col-sm-6 mb30 wow fadeInRight" data-wow-delay=".4s">
+                {{-- <div class="col-lg-4 col-md-6 col-sm-6 mb30 wow fadeInRight" data-wow-delay=".4s">
                     <div class="f-profile text-center">
                         <div class="fp-wrap f-invert">
                             <div class="fpw-overlay">
@@ -95,7 +95,7 @@
                         <h4>John Shepard</h4>
                         Associate
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
