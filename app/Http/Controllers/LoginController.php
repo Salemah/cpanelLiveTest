@@ -126,6 +126,13 @@ class LoginController extends Controller
 
         if (!is_null($verifyUser)) {
 
+            if ($verifyUser->created_at->addMinutes(10)->isPast()) {
+                $message = "Verification link has expired. Please request a new one.";
+                $verifyUser->delete(); // remove expired token
+                return redirect()->route('login')->with('failed', $message);
+            }
+
+
             $user = $verifyUser->user;
 
 

@@ -12,18 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_verify', function (Blueprint $table) {
-
-            $table->integer('user_id');
-
-            $table->string('token');
-
+            $table->id(); // Primary key column
+            $table->unsignedBigInteger('user_id');
+            $table->string('token')->unique();
             $table->timestamps();
+
+            // Optional: enforce relationship
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-
-
         Schema::table('users', function (Blueprint $table) {
-
             $table->boolean('is_email_verified')->default(0);
         });
     }
