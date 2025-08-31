@@ -68,6 +68,8 @@ Route::post('contact_us_message_insert', [ContactUsMessageController::class, 'Co
 
 Route::post('signin-process', [LoginController::class, 'SignInProcess'])->name('sign-in.process');
 Route::post('signUp-process', [LoginController::class, 'SignUpProcess'])->name('sign-Up.process');
+Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('user.verify');
+
 Route::get('/download-pdf/{hashid}', [AppointmentController::class, 'downloadPdf'])->name('pdf.download');
 
 Route::get('/payment/{id?}', [AppointmentController::class, 'PaymentInstruction'])->name('payment.instruction');
@@ -76,7 +78,9 @@ Route::get('/unauthorized', function () {
     return view('errors.unauthorized');
 })->name('error.unauthorized');
 
-Route::middleware('auth')->group(function () {
+
+
+Route::middleware(['auth', 'is_verify_email'])->group(function () {
 
     Route::get('/user/dashboard', [HomeController::class, 'UserDashboard'])->name('user.panel');
     Route::post('profile_update', [ProfileController::class, 'UserProfileUpdate'])->name('account.profile.update');

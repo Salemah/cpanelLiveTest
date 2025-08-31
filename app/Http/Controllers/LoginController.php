@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\DemoMail;
 use App\Mail\UserGreetingMail;
+use App\Mail\VerificationEmail;
 use App\Models\CompanySetting;
 use App\Models\User;
+use App\Models\UserVerify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -82,8 +84,67 @@ class LoginController extends Controller
         ];
         $dynamicSubject = $Setting->title . ' - Welcome ' . $request->name;
         // dd($mailData);
-        Mail::to($request->email)->send(new UserGreetingMail($mailData, $dynamicSubject));
+        // Mail::to($request->email)->send(new UserGreetingMail($mailData, $dynamicSubject));
 
-        return redirect()->route('login')->with('message', 'Sign-up Successfully Completed!');
+        //for email verification
+
+        $data = $request->all();
+        $createUser = $user;
+        $token = Str::random(64);
+
+        UserVerify::create([
+
+            'user_id' => $createUser->id,
+
+            'token' => $token
+
+        ]);
+        // Mail::send('mail.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
+
+        //     $message->to($request->email);
+
+        //     $message->subject('Email Verification Mail');
+        // });
+        $Setting = CompanySetting::first();
+        $dynamicSubject = $Setting->title . ' - Welcome ' . $request->name;
+
+        Mail::to($request->email)->send(new VerificationEmail($data, $dynamicSubject, $token));
+
+        return redirect()->route('login')->with('message', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+    }
+    public function verifyAccount($token)
+
+    {
+
+        $verifyUser = UserVerify::where('token', $token)->first();
+
+
+
+        $message = 'Sorry your email cannot be identified.';
+
+
+
+        if (!is_null($verifyUser)) {
+
+            $user = $verifyUser->user;
+
+
+
+            if (!$user->is_email_verified) {
+
+                $verifyUser->user->is_email_verified = 1;
+
+                $verifyUser->user->save();
+
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+
+
+
+        return redirect()->route('login')->with('message', $message);
     }
 }
