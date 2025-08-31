@@ -17,17 +17,19 @@ class VerificationEmail extends Mailable
     public $data;
     public $subject;
     public $token;
+    public $Setting;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $subject, $token)
+    public function __construct($data, $subject, $token, $Setting)
     {
         $this->data = $data;
         $this->subject = $subject; // Set the dynamic subject
         $this->token = $token; // Set the dynamic subject
+        $this->Setting = $Setting; // Set the dynamic subject
     }
 
     /**

@@ -108,9 +108,9 @@ class LoginController extends Controller
         $Setting = CompanySetting::first();
         $dynamicSubject = $Setting->title . ' - Welcome ' . $request->name;
 
-        Mail::to($request->email)->send(new VerificationEmail($data, $dynamicSubject, $token));
+        Mail::to($request->email)->send(new VerificationEmail($data, $dynamicSubject, $token, $Setting));
 
-        return redirect()->route('login')->with('message', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+        return redirect()->route('login')->with('message', 'Sign-up successful! Please check your email to verify your account.');
     }
     public function verifyAccount($token)
 
